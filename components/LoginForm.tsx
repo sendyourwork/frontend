@@ -1,7 +1,8 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import loginWithNameAndPassword from "../utils/loginWithNameAndPassword";
 
 export default function LoginForm (): JSX.Element {
+    const submitRef = useRef<HTMLInputElement>(null)
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const handleSubmit = (event: React.SyntheticEvent) => {
@@ -10,6 +11,14 @@ export default function LoginForm (): JSX.Element {
             loginWithNameAndPassword(name, password);
         }
     }
+    useEffect(() => {
+        if(name && password) {
+            submitRef.current?.removeAttribute('disabled');
+        }
+        else{
+            submitRef.current?.setAttribute('disabled', 'disabled');
+        }
+    }, [name, password])
     return (
         <form onSubmit = {handleSubmit} className="flex flex-col gap-8 w-max">
             <input
@@ -27,9 +36,10 @@ export default function LoginForm (): JSX.Element {
                 onChange={(e: React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)}
             />
             <input 
-                className="w-24 h-14 ml-auto p-2 rounded hover: cursor-pointer"
+                className="disabled:text-gray-400 disabled:hover:cursor-default w-24 h-14 ml-auto p-2 rounded hover:cursor-pointer"
                 type="submit" 
                 value="Log in"
+                ref={submitRef}
             />
         </form>
     )

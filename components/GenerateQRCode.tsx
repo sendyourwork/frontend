@@ -6,8 +6,8 @@ export default function GenerateQRCode({text}: {text: string}): JSX.Element {
     const [error, setError] = useState<null | Error>(null);
     useEffect(() => {
         QRCode.toCanvas(canvasRef.current, text, {
-            width: 232,
-            margin: 1
+            width: 225,
+            margin: 0
         }, function(error) {
             setError(error);
         })

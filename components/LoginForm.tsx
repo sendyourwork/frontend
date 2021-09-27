@@ -36,7 +36,7 @@ export default function LoginForm (): JSX.Element {
                 onChange={(e: React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)}
             />
             <input 
-                className="disabled:text-gray-400 disabled:hover:cursor-default w-24 h-14 ml-auto p-2 rounded hover:cursor-pointer"
+                className="disabled:text-black disabled:bg-white disabled:opacity-50 disabled:hover:cursor-default w-24 h-12 ml-auto rounded hover:cursor-pointer"
                 type="submit" 
                 value="Log in"
                 ref={submitRef}

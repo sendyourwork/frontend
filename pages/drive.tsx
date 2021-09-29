@@ -18,11 +18,14 @@ const Drive: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Public drive</title>
+                <title>Public drive | Send Your Work</title>
             </Head>
-            <div className="py-14 px-12">
+            <div className="py-14 px-12 w-full md:w-3/4">
                 <h1 className="text-5xl font-bold mb-8">Public Drive</h1>
-                <AddFileForm />
+                <div className="grid grid-cols-2 gap-9">
+                    <AddFileForm />
+                    <div></div>
+                </div>
                 <FilesList files={files}/>
             </div>
         </>

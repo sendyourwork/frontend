@@ -61,7 +61,7 @@ export default function AddFileForm(): JSX.Element {
             onDrop={handleDrop}
             onDragEnter={preventDefaultDragEvent}
             onDragOver={preventDefaultDragEvent}
-            className="p-5 myShadow rounded width99"
+            className="p-5 myShadow rounded"
         >
             <input type="file" id="files" className="w-0" onChange={handleChangeFile} multiple/>
             <label htmlFor="files" className="text-blue-600 hover:cursor-pointer">Select a file </label>

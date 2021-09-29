@@ -5,7 +5,7 @@ import FilesList from "../components/FilesList";
 const Drive: NextPage = () => {
     const files = [
         {
-            id:'34sdsads',
+            id:'34rdsads',
             name: 'something.mp4',
             size: '7 MB'
         },

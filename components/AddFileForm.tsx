@@ -18,11 +18,28 @@ export default function AddFileForm(): JSX.Element {
             return true;
         }
     }
+    const checkIsFolder = (files: FileList): Boolean => {
+        for(let i = 0; i < files.length; i++) {
+            if(!files[i].type)
+            {
+                setError("Your files have folder.")
+                return true;
+            }
+        }
+        return false;
+    }
     const checkAndSend = (files: FileList | null) => {
         if(files && files.length){
             if(checkIsFilesSizeNotTooBig(files)){
+                if(!checkIsFolder(files)) {
+                    console.log(files);                
+                // const filesToSend = new FormData();
+                // for(let i = 0; files.length > i; i++){
+                //     filesToSend.append(String(i), files[i]);
+                // }
+                //we have file in binary code here, idk is this will work correctly
                 //send to backend
-                console.log(files);
+                }
             }
         }
     }

@@ -6,6 +6,11 @@ module.exports = {
     fontFamily: {
       sans: ['Roboto', 'sans-serif'],
       jetbrains: ['JetBrains Mono', 'monospace']
+    },
+    extend: {
+      gridTemplateColumns: {
+        'home': '80% 20%'
+      }
     }
   },
   variants: {

@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import React, { useState } from "react";
-import AddFileForm from "../components/AddFileForm";
+import AddFile from "../components/AddFile";
 import Chat from "../components/Chat";
 import FilesList from "../components/FilesList";
 import SendEmailForm from "../components/SendEmailForm";
@@ -37,7 +37,7 @@ const Home: NextPage = () => {
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
                             />
                         </div>
-                        <AddFileForm />
+                        <AddFile />
                     </div>
                     <FilesList files={files}/>
                     <div className="w-5/12">

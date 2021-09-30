@@ -9,7 +9,10 @@ module.exports = {
     },
     extend: {
       gridTemplateColumns: {
-        'home': '80% 20%'
+        'home': '1fr 400px'
+      },
+      maxWidth: {
+        '3/4': '75%'
       }
     }
   },

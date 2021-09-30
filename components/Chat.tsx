@@ -7,36 +7,35 @@ export default function Chat(): JSX.Element {
     const [messages, setMessages] = useState<Message[]>(
     [
         {
-            id: "abcd123",
-            icon: "dakdaj",
+            messageId: "adadaaddad",
+            senderId: "abcd123",
+            senderIcon: "dakdaj",
             message: "Wilczur OP"
         },
         {
-            id:"Artiu",
-            icon: "adadad",
+            messageId: "daoadjdajoda",
+            senderId:"Artiu",
+            senderIcon: "adadad",
             message: "Wilczur Giga OP"
         }
     ]);
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
-        setMessages([...messages, {id: clientId, message: inputValue, icon: "ojaofa"}]);
+        setMessages([...messages, {messageId:"dalokdak", senderId: clientId, message: inputValue, senderIcon: "ojaofa"}]);
         setInputValue('');
     }
     return (
     <form className="px-4" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-2">
-        {messages.map(({id, icon, message}: Message) => {
+        {messages.map(({messageId, senderId, senderIcon, message}: Message) => {
+            if(clientId === senderId) {
+                return <p className="py-2 px-4 ml-auto bg-blue-600 rounded-3xl max-w-3/4 text-white break-words" key={messageId}>{message}</p>
+            }
             return (
-                <>
-                    {clientId === id ?
-                    <p className="py-2 px-4 ml-auto bg-blue-600 rounded-3xl max-w-max text-white" key={id}>{message}</p>
-                    :
-                    <div key={id} className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-black"></div>
-                        <p className="py-2 px-4 bg-white rounded-3xl max-w-max border border-gray-200">{message}</p>
-                    </div>
-                    }
-                </>
+                <div key={messageId} className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-black"></div>
+                    <p className="py-2 px-4 bg-white rounded-3xl max-w-3/4 border border-gray-200 break-words">{message}</p>
+                </div>
             )
         })
         }

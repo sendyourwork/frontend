@@ -1,5 +1,6 @@
 export interface Message {
-    id: string,
-    icon: string,
+    messageId: string,
+    senderId: string,
+    senderIcon: string,
     message: string
 }

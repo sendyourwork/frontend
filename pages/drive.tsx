@@ -24,7 +24,6 @@ const Drive: NextPage = () => {
                 <h1 className="text-5xl font-bold mb-8">Public Drive</h1>
                 <div className="grid grid-cols-2 gap-9">
                     <AddFile />
-                    <div></div>
                 </div>
                 <FilesList files={files}/>
             </div>

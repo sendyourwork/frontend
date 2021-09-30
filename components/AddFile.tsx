@@ -32,7 +32,6 @@ export default function AddFile({add}: AddFileProps): JSX.Element {
         for(let i = 0; i < files.length; i++) {
             if(!files[i].type)
             {
-                setError("Your files have folder.")
                 return true;
             }
         }

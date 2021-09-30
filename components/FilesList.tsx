@@ -6,7 +6,7 @@ interface IFilesList {
 
 export default function FilesList({files}: IFilesList): JSX.Element {
     return (
-        <div className="py-16 grid grid-cols-2 gap-9">
+        <div className="py-16 flex flex-col xl:grid grid-cols-2 gap-9">
             {files.map(({name, size, id}: File) => {
                 return (
                     <div key={id} className="p-5 myShadow rounded flex">

@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import AddFile from "../components/AddFile";
-import FilesList from "../components/FilesList";
+import FilesToDownloadList from "../components/FilesToDownloadList";
 const Drive: NextPage = () => {
     const files = [
         {
@@ -25,7 +25,7 @@ const Drive: NextPage = () => {
                 <div className="xl:grid grid-cols-2 gap-9">
                     <AddFile />
                 </div>
-                <FilesList files={files}/>
+                <FilesToDownloadList files={files}/>
             </div>
         </>
     )

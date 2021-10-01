@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { checkIsFilesSizeNotTooBig } from '../helpers/checkIsFileSizeNotTooBig';
 
 type AddFileProps = {
     add?: (newFiles: File[]) => void
@@ -11,22 +12,6 @@ export default function AddFile({add}: AddFileProps): JSX.Element {
 
     const handleAddFileClick = () => {
         fileInputRef.current?.click();
-    }
-    const checkIsFilesSizeNotTooBig = (files: FileList): boolean => {
-        let size = 0;
-        const MB = 1024 * 1024;
-        const maxSize = MB * 10;
-        for(let i = 0; i < files.length; i++) {
-            size += files[i].size;
-        }
-        if(size > maxSize) {
-            setError("The file weight more than 10 MB");
-            return false;
-        }
-        else {
-            setError("");
-            return true;
-        }
     }
     const checkIsFolder = (files: FileList): Boolean => {
         for(let i = 0; i < files.length; i++) {
@@ -47,6 +32,7 @@ export default function AddFile({add}: AddFileProps): JSX.Element {
     const checkAndSend = (files: FileList | null) => {
         if(files && files.length){
             if(checkIsFilesSizeNotTooBig(files)){
+                setError("");
                 if(!checkIsFolder(files)) {
                     const filesArray = FileListToFile(files);
                     if(add) {
@@ -62,6 +48,12 @@ export default function AddFile({add}: AddFileProps): JSX.Element {
                         //send to backend
                     }
                 }
+                else {
+                    setError("Your files have folder!");
+                }
+            }
+            else {
+                setError("Your file weight more than 10 MB");
             }
         }
     }

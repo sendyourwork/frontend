@@ -3,7 +3,7 @@ import Head from "next/head";
 import React, { useState } from "react";
 import AddFile from "../components/AddFile";
 import Chat from "../components/Chat";
-import FilesList from "../components/FilesList";
+import FilesToDownloadList from "../components/FilesToDownloadList";
 import SendEmailForm from "../components/SendEmailForm";
 
 const Home: NextPage = () => {
@@ -39,7 +39,7 @@ const Home: NextPage = () => {
                         </div>
                         <AddFile />
                     </div>
-                    <FilesList files={files}/>
+                    <FilesToDownloadList files={files}/>
                     <div className="w-full xl:w-5/12">
                         <SendEmailForm />
                     </div>

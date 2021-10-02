@@ -33,7 +33,11 @@ export default function Chat(): JSX.Element {
 
     return (
     <>
-        <form className="fixed top-0 left-0 w-full h-5/6 py-6 flex flex-col justify-end bg-white px-4 xl:static invisible xl:visible xl:block xl:py-0" onSubmit={handleSubmit} ref={formRef}>
+        <form 
+            className="fixed top-0 left-0 w-full h-5/6 py-6 flex flex-col justify-end bg-white px-4 xl:h-auto xl:static invisible xl:visible xl:block xl:py-0" 
+            onSubmit={handleSubmit} 
+            ref={formRef}
+        >
             <div className="flex flex-col gap-2">
             {messages.map(({messageId, senderId, senderIcon, message}: Message) => {
                 if(clientId === senderId) {

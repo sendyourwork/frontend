@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Message } from "../interfaces/message"
 
 export default function Chat(): JSX.Element {
@@ -19,29 +19,42 @@ export default function Chat(): JSX.Element {
         }
     ]);
     const formRef = useRef<HTMLFormElement | null>(null);
+    const chatRef = useRef<HTMLDivElement | null>(null);
     const clientId = "Artiu";
 
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
-        setMessages([...messages, {messageId:"dalokdak", senderId: clientId, message: inputValue, senderIcon: "ojaofa"}]);
-        setInputValue('');
+        if(inputValue) {
+            setMessages([...messages, {messageId:String(messages.length), senderId: clientId, message: inputValue, senderIcon: "ojaofa"}]);
+            setInputValue('');
+        }
     }
 
     const changeFormVisible = () => {
-        formRef.current?.classList.toggle('invisible');
+        formRef.current?.classList.toggle('hidden');
+        formRef.current?.classList.toggle('flex');
+        const currentOverflowStatus = document.body.style.overflow;
+        document.body.style.overflow = currentOverflowStatus ? "" : "hidden";
     }
+
+    useEffect(() => {
+        if(messages.length > 200) {
+            setMessages(messages.slice(1));
+        }
+        chatRef.current?.scroll({top:chatRef.current?.scrollHeight, behavior: 'smooth'})
+    },[messages])
 
     return (
     <>
         <form 
-            className="fixed top-0 left-0 w-full h-5/6 py-6 flex flex-col justify-end bg-white px-4 xl:h-auto xl:static invisible xl:visible xl:block xl:py-0" 
+            className="fixed left-0 top-0 w-full h-full pb-24 hidden xl:flex flex-col justify-end bg-white px-4 xl:pr-0 xl:top-auto xl:static xl:left-auto xl:bottom-0 xl:right-0 xl:h-auto xl:py-0" 
             onSubmit={handleSubmit} 
             ref={formRef}
         >
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col py-2 gap-2 xl:max-h-96 overflow-auto" ref={chatRef}>
             {messages.map(({messageId, senderId, senderIcon, message}: Message) => {
                 if(clientId === senderId) {
-                    return <p className="py-2 px-4 ml-auto bg-blue-600 rounded-3xl max-w-3/4 text-white break-words" key={messageId}>{message}</p>
+                    return <p className="py-2 px-4 ml-auto bg-blue-600 rounded-3xl max-w-3/4 mr-3 text-white break-words" key={messageId}>{message}</p>
                 }
                 return (
                     <div key={messageId} className="flex items-center gap-2">
@@ -55,7 +68,7 @@ export default function Chat(): JSX.Element {
             <input 
                 type="text" 
                 placeholder="Type here..." 
-                className="xl:w-full rounded outline-none myShadow py-4 px-2 mt-8"
+                className="w-full rounded outline-none myShadow py-4 px-2 mr-4 xl:mr-0 mt-8"
                 value={inputValue}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => setInputValue(event.target.value)}
             />

@@ -5,12 +5,12 @@ import FilesToDownloadList from "../components/FilesToDownloadList";
 const Drive: NextPage = () => {
     const files = [
         {
-            id:'34rdsads',
+            id: '34rdsads',
             name: 'something.mp4',
             size: '7 MB'
         },
         {
-            id:'34sdsads',
+            id: '34sdsads',
             name: 'something.mp4',
             size: '7 MB'
         }
@@ -25,7 +25,7 @@ const Drive: NextPage = () => {
                 <div className="xl:grid grid-cols-2 gap-9">
                     <AddFile />
                 </div>
-                <FilesToDownloadList files={files}/>
+                <FilesToDownloadList files={files} />
             </div>
         </>
     )

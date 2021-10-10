@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
+import Navbar from '../components/landing/Navbar'
 
 const Page: NextPage = () => {
     return (
-        <p className="h-screen grid place-items-center text-9xl text-red-500">Hello world! </p>
+        <Navbar />
     )
 }
 export default Page;

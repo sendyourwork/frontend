@@ -1,20 +1,34 @@
+import React from "react";
+import Link from 'next/link'
 export default function Navbar(): JSX.Element {
     return (
-        <div className="flex items-center justify-end w-100 h-36 mx-20 text-white bg-black font-montserrat ">
+        <div className="flex items-center justify-end w-100 h-15vh mx-20 font-montserrat">
             <div className="flex h-max mr-auto text-3xl font-extrabold">
-                <span className="">send</span>
-                <span className="text-main ">Your</span>
-                <span className="">work</span>
+                <span className="">Send</span>
+                <span className="text-main">Your</span>
+                <span className="">Work</span>
             </div>
-            <div className="flex h-max text-gray">
+            <div className="flex h-max text-gray-500">
                 <ul className="flex column m-0 p-0">
-                    <li className="mx-6">About project</li>
-                    <li className="mx-6">How It Works</li>
-                    <li className="mx-6">About Us</li>
+                    <Link href="/drive">
+                        <span className="mx-6 cursor-pointer">
+                            About project
+                        </span>
+                    </Link>
+                    <Link href="/drive">
+                        <span className="mx-6 cursor-pointer">
+                            How it works
+                        </span>
+                    </Link>
+                    <Link href="/drive" >
+                        <span className="mx-6 cursor-pointer">
+                            How it works
+                        </span>
+                    </Link>
                 </ul>
             </div>
             <div className="flex ml-6 h-max">
-                <button className="p-2 border-2 border-main rounded h-1/4 text-main">Log in</button>
+                <button className="py-2 px-3 border-2 border-main rounded h-1/4 text-main font-medium">Log in</button>
             </div>
         </div>
     )

@@ -17,11 +17,14 @@ module.exports = {
       },
       maxWidth: {
         '3/4': '75%'
-      }
-    },
-    colors: {
-      main: "#4158D0",
-      gray: "gray"
+      },
+      height: {
+        '15vh': '15vh',
+        '85vh': '85vh'
+      },
+      colors: {
+        "main": "#4158D0",
+      },
     },
   },
   variants: {

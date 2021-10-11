@@ -20,11 +20,6 @@ export default function Navbar(): JSX.Element {
                             How it works
                         </span>
                     </Link>
-                    <Link href="/drive" >
-                        <span className="mx-6 cursor-pointer">
-                            How it works
-                        </span>
-                    </Link>
                 </ul>
             </div>
             <div className="flex ml-6 h-max">

@@ -1,11 +1,9 @@
-import Image from 'next/image'
-
 export default function Main(): JSX.Element {
     return (
-        <div className="flex h-85vh font-montserrat">
+        <div className="flex h-85vh font-montserrat relative">
             <img src="/Star 6.svg" className="left-4 absolute transform hover:rotate-180 hover:scale-125 transition duration-500" />
             <img src="/Rectangle90.svg" className="top-3/4 left-1/4 absolute transform hover:rotate-180 hover:scale-150 transition duration-500" />
-            <img src="/Circle91.svg" className="top-3/4 left-2/4 absolute transform hover:rotate-180 hover:scale-125 transition duration-500" />
+            <img src="/Circle91.svg" className="bottom-8 left-2/4 absolute transform hover:rotate-180 hover:scale-125 transition duration-500" />
             <img src="/Rectangle93.svg" className="top-30 left-2/4 absolute transform hover:rotate-180 hover:scale-150 transition duration-500" />
             <img src="/Rectangle94.svg" className="right-12 top-3/4 absolute transform hover:rotate-180 hover:scale-50 transition duration-500" />
             <div className="flex w-1/2 h-5/6 justify-center">
@@ -18,8 +16,8 @@ export default function Main(): JSX.Element {
                 </div>
             </div>
             <div className="flex items-center justify-end mr-10 w-1/2 h-5/6">
-                <img src="/Group 146.png" alt="" />
+                <img src="/Group 146.png" alt="myShadow" />
             </div>
-        </div>
+        </div >
     )
 }

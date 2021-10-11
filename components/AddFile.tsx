@@ -39,11 +39,15 @@ export default function AddFile({add}: AddFileProps): JSX.Element {
                         add(filesArray); 
                     }
                     else {
-                        console.log(filesArray);                
+                        // console.log(filesArray);                
                         // const filesToSend = new FormData();
                         // for(let i = 0; files.length > i; i++){
                         //     filesToSend.append(String(i), files[i]);
                         // }
+                        // fetch('https://localhost:3001', {
+                        //     method:'POST',
+                        //     body: filesToSend
+                        // })
                         //we have file in binary code here, idk is this will work correctly
                         //send to backend
                     }

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from 'next/link'
-export default function Navbar(): JSX.Element {
+export default function Navbar({isLoggedIn}: {isLoggedIn: boolean}): JSX.Element {
     return (
         <div className="flex items-center justify-end w-100 h-15vh mx-20 font-montserrat">
             <div className="flex h-max mr-auto text-3xl font-extrabold">
@@ -23,7 +23,19 @@ export default function Navbar(): JSX.Element {
                 </ul>
             </div>
             <div className="flex ml-6 h-max">
-                <button className="py-2 px-3 border-2 border-main rounded h-1/4 text-main font-medium">Log in</button>
+                {isLoggedIn ? 
+                    <Link href="/drive">
+                        <span className="py-2 px-3 border-2 border-main rounded h-1/4 text-main font-medium cursor-pointer">
+                            Drive
+                        </span>
+                    </Link>
+                    :
+                    <Link href="/login">
+                        <span className="py-2 px-3 border-2 border-main rounded h-1/4 text-main font-medium cursor-pointer">
+                            Log in
+                        </span>
+                    </Link>
+                }
             </div>
         </div>
     )

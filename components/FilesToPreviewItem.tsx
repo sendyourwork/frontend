@@ -1,34 +1,40 @@
 import { useEffect, useState } from "react";
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import style from 'react-syntax-highlighter/dist/cjs/styles/hljs/a11y-dark';
 
 interface FilesToPreviewItemProps {
     file: File,
     remove: () => void
 }
 export default function FilesToPreviewItem({file, remove}: FilesToPreviewItemProps): JSX.Element {
-    const [imgSrc, setImgSrc] = useState<undefined | string>(undefined);
+    const [text, setText] = useState<string | ArrayBuffer | null | undefined>('');
+    const imgSrc: string | undefined = file.type.startsWith("image/") ? URL.createObjectURL(file) : undefined;
     const [isPreviewVisible, setIsPreviewVisible] = useState(false);
     const sizeInMB = Math.round(file.size/(1024*1024));
     const sizeInKB = Math.round(file.size/1024);
     const formatedSize = sizeInMB ? sizeInMB + " MB" : sizeInKB + " KB";
-
     useEffect(() => {
-        if(file.type.startsWith("image/"))
-        {
-            setImgSrc(URL.createObjectURL(file));
+        if(isPreviewVisible && file.type.startsWith('text/')) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                setText(e.target?.result);
+            };
+            reader.readAsText(file);
         }
-    }, [])
+    }, [isPreviewVisible])
+
     return (
     <div className="py-2 pl-2 pr-4 myShadow rounded flex items-center gap-2">
-        {imgSrc ? 
         <button className="cursor-pointer" onClick={() => {
             setIsPreviewVisible(true);
             document.body.style.overflow = "hidden";
         }}>
-            <svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 0 24 24" width="36px" fill="#2563eb"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-        </button>
-        :
-        <svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 0 24 24" width="36px" fill="#2563eb"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg>
+        {imgSrc ? 
+            <svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 0 24 24" width="36px" fill="#2563eb"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4.86 8.86l-3 3.87L9 13.14 6 17h12l-3.86-5.14z"/></svg>
+            :
+            <svg xmlns="http://www.w3.org/2000/svg" height="36px" viewBox="0 0 24 24" width="36px" fill="#2563eb"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg>
         }
+        </button>
         <div>
             <p className="break-all">{file.name}</p>
             <p className="text-gray-400">{formatedSize}</p>
@@ -45,9 +51,20 @@ export default function FilesToPreviewItem({file, remove}: FilesToPreviewItemPro
                     document.body.style.overflow = "auto";
                 }}
             >
-                x
+                <span>x</span>
             </button>
-            <img src={imgSrc} className="max-h-full max-w-full"/>
+            {imgSrc ?
+                <img src={imgSrc} className="max-h-full max-w-full"/>
+                :
+            file.type.startsWith("text/") ?
+                <div className="overflow-auto max-h-full">
+                    <SyntaxHighlighter showLineNumbers={true} style={style}>
+                        {text}
+                    </SyntaxHighlighter>
+                </div>
+                :
+                <p>{"Our preview doesn't support this file type"}</p>
+            }
         </div>
         }
     </div>

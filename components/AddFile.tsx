@@ -106,7 +106,7 @@ export default function AddFile({add}: AddFileProps): JSX.Element {
             className="p-5 myShadow rounded relative"
         >
             <input type="file" ref={fileInputRef} className="w-0" onChange={handleChangeFile} multiple/>
-            <button onClick={handleAddFileClick} className="text-blue-600 hover:cursor-pointer">Select a file</button>
+            <button onClick={handleAddFileClick} className="text-blue-600 hover:text-blue-500 hover:cursor-pointer">Select a file</button>
             <span> or drag in form</span>
             {error ? 
                 <p className="text-red-500 text-sm">{error}</p>

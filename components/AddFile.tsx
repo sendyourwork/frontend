@@ -15,7 +15,7 @@ export default function AddFile({add}: AddFileProps): JSX.Element {
     }
     const checkIsFolder = (files: FileList): Boolean => {
         for(let i = 0; i < files.length; i++) {
-            if(!files[i].type)
+            if(!files[i].name.includes('.'))
             {
                 return true;
             }

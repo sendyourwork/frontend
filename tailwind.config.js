@@ -15,6 +15,11 @@ module.exports = {
       gridTemplateColumns: {
         'home': '1fr 400px'
       },
+      width: {
+        '500px': '500px',
+        '750px': '750px',
+        '1000px': '1000px',
+      },
       maxWidth: {
         '3/4': '75%'
       },

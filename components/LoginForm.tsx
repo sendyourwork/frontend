@@ -16,7 +16,7 @@ export default function LoginForm(): JSX.Element {
         name && password ? submitRef.current?.removeAttribute('disabled') : submitRef.current?.setAttribute('disabled', 'disabled');
     }, [name, password])
     return (
-        <form action="" className="flex w-1/5 flex-col rounded-xl myShadow z-10 bg-white" onSubmit={handleSubmit}>
+        <form action="" className="flex w-auto flex-col rounded-xl myShadow z-10 bg-white" onSubmit={handleSubmit}>
             <h1 className="mx-5 mt-5 text-4xl font-bold pb-3">Profile</h1>
             <h4 className="mx-5 w-12 text-center inline-block border-b-2 border-main pb-1">Sign in</h4>
             <div className="flex flex-col py-5 items-center border-t border-gray-300">

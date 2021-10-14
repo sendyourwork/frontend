@@ -26,6 +26,9 @@ module.exports = {
         "main": "#4158D0",
         "highlight": "#2b2b2b"
       },
+      outline: {
+        main: ['2px solid #4158D0']
+      }
     },
   },
   variants: {

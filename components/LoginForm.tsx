@@ -9,7 +9,6 @@ export default function LoginForm(): JSX.Element {
     const [password, setPassword] = useState('');
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
-        console.log();
         email && password ? loginWithNameAndPassword(email, password) : false;
     }
     useEffect(() => {

@@ -4,17 +4,40 @@ import { useMediaQuery } from 'react-responsive'
 import GenerateQRCode from '../components/GenerateQRCode'
 import LoginForm from '../components/LoginForm'
 import Link from 'next/link'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import Timer from '../components/Timer'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 
 const Home: NextPage = () => {
-  const sessionId = "dadkjmnamkadkmk1123"
+  const [isLoading, setIsLoading] = useState(true);
+  const [sessionId, setSessionId] = useState<string>(null);
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
   const isRectangle = useMediaQuery({ query: '(max-width: 1440px)' });
   const photo = useRef<HTMLImageElement>(null)
 
   isRectangle ? photo.current?.classList.add('left-12') : photo.current?.classList.remove('left-12')
   isRectangle ? photo.current?.classList.add('w-3/5') : photo.current?.classList.remove('w-3/5')
+
+  const getNewSessionId = () => {
+    setIsLoading(true);
+    //get new session from backend
+    let text = "";
+    for(let i = 0; i < 10; i++){
+      text += String(Math.floor(Math.random() * i));
+    }
+    setSessionId(text);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500)
+  }
+
+  useEffect(() => {
+    if(sessionId === null) {
+      getNewSessionId();
+    }
+  }, [sessionId])
+
   return (
     <>
       <Head>
@@ -31,9 +54,14 @@ const Home: NextPage = () => {
         </Link>
         <LoginForm />
         {
-          !isMobile && <div className="flex flex-col w-auto bg-white items-center justify-between h-2/5 rounded-xl myShadow">
+          !isMobile && 
+          isLoading ?
+            <LoadingSpinner />
+          :
+          <div className="flex flex-col w-auto bg-white items-center justify-between h-2/5 rounded-xl myShadow">
             <h1 className="text-4xl font-bold m-5">Sign in with QR</h1>
             <GenerateQRCode text={sessionId} />
+            <p>QR code expires in <Timer time={5 * 60} taskAfter={() => setSessionId(null)}/></p>
           </div>
         }
       </div>

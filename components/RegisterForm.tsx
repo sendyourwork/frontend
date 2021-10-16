@@ -30,8 +30,19 @@ export default function RegisterForm(): JSX.Element {
                     className="focus:outline-main rounded myShadow w-10/12 h-12 my-2 py-2 pl-3.5" placeholder="Name"
                     type="text"
                     name="name"
+                    autoComplete="off"
                     onChange={(e: React.FormEvent<HTMLInputElement>) => setName(e.currentTarget.value)}
                 />
+                <input
+                    className="rounded myShadow w-10/12 h-12 m-2 py-2 pl-3.5 focus:outline-main" placeholder="Password"
+                    type="password"
+                    name="password"
+                    onChange={(e: React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)} />
+                <input
+                    className="rounded myShadow w-10/12 h-12 m-2 py-2 pl-3.5 focus:outline-main" placeholder="Confirm password"
+                    type="password"
+                    name="password"
+                    onChange={(e: React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)} />
                 <input
                     className="rounded myShadow w-10/12 h-12 m-2 py-2 pl-3.5 focus:outline-main" placeholder="School Number/Class Name"
                     type="text"
@@ -43,11 +54,6 @@ export default function RegisterForm(): JSX.Element {
                     type="text"
                     name="email"
                     onChange={(e: React.FormEvent<HTMLInputElement>) => setEmail(e.currentTarget.value)} />
-                <input
-                    className="rounded myShadow w-10/12 h-12 m-2 py-2 pl-3.5 focus:outline-main" placeholder="Password"
-                    type="password"
-                    name="password"
-                    onChange={(e: React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)} />
             </div>
             <div>
                 <input
@@ -63,7 +69,7 @@ export default function RegisterForm(): JSX.Element {
                 </label >
             </div>
             <input
-                className="bg-main rounded text-white mt-5 mx-12 h-10 cursor-pointer disabled:bg-gray-300"
+                className="bg-main rounded text-white mt-5 mx-12 h-10 disabled:cursor-default cursor-pointer disabled:bg-gray-300"
                 type="submit"
                 value="Sign up"
                 ref={submitRef}

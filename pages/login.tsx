@@ -23,7 +23,7 @@ const Home: NextPage = () => {
     setIsLoading(true);
     //get new session from backend
     let text = "";
-    for(let i = 0; i < 10; i++){
+    for (let i = 0; i < 10; i++) {
       text += String(Math.floor(Math.random() * i));
     }
     setSessionId(text);
@@ -33,7 +33,7 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
-    if(sessionId === null) {
+    if (sessionId === null) {
       getNewSessionId();
     }
   }, [sessionId])
@@ -54,15 +54,15 @@ const Home: NextPage = () => {
         </Link>
         <LoginForm />
         {
-          !isMobile && 
-          isLoading ?
+          !isMobile &&
+          (isLoading ?
             <LoadingSpinner />
-          :
-          <div className="flex flex-col w-auto bg-white items-center justify-between h-2/5 rounded-xl myShadow">
-            <h1 className="text-4xl font-bold m-5">Sign in with QR</h1>
-            <GenerateQRCode text={sessionId} />
-            <p>QR code expires in <Timer time={5 * 60} taskAfter={() => setSessionId(null)}/></p>
-          </div>
+            :
+            <div className="flex flex-col w-auto bg-white items-center justify-between rounded-xl myShadow">
+              <h1 className="text-4xl font-bold m-5">Sign in with QR</h1>
+              <GenerateQRCode text={sessionId} />
+              <p>QR code expires in <Timer time={5 * 60} taskAfter={() => setSessionId(null)} /></p>
+            </div>)
         }
       </div>
     </>

@@ -58,7 +58,7 @@ const Home: NextPage = () => {
           (isLoading ?
             <LoadingSpinner />
             :
-            <div className="flex flex-col w-auto bg-white items-center justify-between rounded-xl myShadow">
+            <div className="flex flex-col w-auto bg-white items-center justify-between rounded-xl myShadow pb-2">
               <h1 className="text-4xl font-bold m-5">Sign in with QR</h1>
               <GenerateQRCode text={sessionId} />
               <p>QR code expires in <Timer time={5 * 60} taskAfter={() => setSessionId(null)} /></p>

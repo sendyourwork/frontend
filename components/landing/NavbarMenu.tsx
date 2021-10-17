@@ -26,7 +26,7 @@ export default function NavbarMenu({ isLoggedIn }: { isLoggedIn: boolean }): JSX
                     </Link>
                     :
                     <Link href="/login">
-                        <span className="py-2 px-3 border-2 border-main rounded h-1/4 text-main font-medium cursor-pointer">
+                        <span className="py-2 px-3 border-2 border-main rounded h-1/4 text-main hover:text-white hover:bg-main font-medium cursor-pointer">
                             Log in
                         </span>
                     </Link>

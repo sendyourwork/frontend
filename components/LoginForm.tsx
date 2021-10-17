@@ -37,7 +37,7 @@ export default function LoginForm(): JSX.Element {
                 ref={submitRef}
             />
             <Link href="/register">
-                <span className="cursor-pointer text-center text-main mt-6 pb-8">Dont’t have account? Sign up!</span>
+                <span className="cursor-pointer text-center text-main mt-6 mb-8 w-max mx-auto">Dont’t have account? Sign up!</span>
             </Link>
         </form>
     )

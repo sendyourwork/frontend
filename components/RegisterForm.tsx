@@ -58,7 +58,7 @@ export default function RegisterForm(): JSX.Element {
             <div>
                 <input
                     type="checkbox"
-                    name="privacyPolicy"
+                    id="privacyPolicy"
                     className="ml-10"
                     onChange={(e: React.FormEvent<HTMLInputElement>) => setPrivacyPolicy(!privacyPolicy)}
                 />
@@ -75,7 +75,7 @@ export default function RegisterForm(): JSX.Element {
                 ref={submitRef}
             />
             <Link href="/login">
-                <span className="cursor-pointer text-center text-main mt-6 pb-8">You already have account? Sign in!</span>
+                <span className="cursor-pointer text-center text-main mt-6 mb-8 mx-auto w-max">You already have account? Sign in!</span>
             </Link>
         </form>
     )

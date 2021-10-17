@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import Timer from '../components/Timer'
 import LoadingSpinner from '../components/LoadingSpinner'
+import Fade from 'react-reveal/Fade'
 
 
 const Home: NextPage = () => {
@@ -53,7 +54,7 @@ const Home: NextPage = () => {
           <img src="/close.svg" className="cursor-pointer absolute right-10 top-10" />
         </Link>
         <LoginForm />
-        {
+        {/* {
           !isMobile &&
           (isLoading ?
             <LoadingSpinner />
@@ -63,6 +64,20 @@ const Home: NextPage = () => {
               <GenerateQRCode text={sessionId} />
               <p>QR code expires in <Timer time={5 * 60} taskAfter={() => setSessionId(null)} /></p>
             </div>)
+        } */}
+        {
+          !isMobile &&
+          <div className="flex flex-col h-5/12 w-auto bg-white items-center justify-between rounded-xl myShadow pb-2">
+            <h1 className="text-4xl font-bold m-5">Sign in with QR</h1>
+            {isLoading ?
+              <LoadingSpinner />
+              :
+              <>
+                <GenerateQRCode text={sessionId} />
+                <p>QR code expires in <Timer time={5 * 60} taskAfter={() => setSessionId(null)} /></p>
+              </>
+            }
+          </div>
         }
       </div>
     </>

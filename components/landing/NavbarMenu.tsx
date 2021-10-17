@@ -2,16 +2,16 @@ import Link from 'next/link'
 
 export default function NavbarMenu({ isLoggedIn }: { isLoggedIn: boolean }): JSX.Element {
     return (
-        <>
-            <div className="flex h-max text-gray-500">
+        <div className="hidden md:flex">
+            <div className="flex h-max items-center text-gray-500">
                 <ul className="flex column m-0 p-0">
                     <Link href="/drive">
-                        <span className="mx-6 cursor-pointer">
+                        <span className="mx-3 cursor-pointer lg:mx-5">
                             About project
                         </span>
                     </Link>
                     <Link href="/drive">
-                        <span className="mx-6 cursor-pointer">
+                        <span className="mx-3 cursor-pointer lg:mx-5">
                             How it works
                         </span>
                     </Link>
@@ -20,18 +20,18 @@ export default function NavbarMenu({ isLoggedIn }: { isLoggedIn: boolean }): JSX
             <div className="flex ml-6 h-max">
                 {isLoggedIn ?
                     <Link href="/drive">
-                        <span className="py-2 px-3 border-2 border-main rounded h-1/4 text-main font-medium cursor-pointer">
+                        <span className="py-2 px-3 border-2 border-main rounded text-main font-medium cursor-pointer">
                             Drive
                         </span>
                     </Link>
                     :
                     <Link href="/login">
-                        <span className="py-2 px-3 border-2 border-main rounded h-1/4 text-main hover:text-white hover:bg-main font-medium cursor-pointer">
+                        <button className="py-2 px-3 border-2 border-main rounded text-main hover:text-white hover:bg-main font-medium cursor-pointer">
                             Log in
-                        </span>
+                        </button>
                     </Link>
                 }
             </div>
-        </>
+        </div>
     )
 }

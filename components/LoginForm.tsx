@@ -42,13 +42,3 @@ export default function LoginForm(): JSX.Element {
         </form>
     )
 }
-/* <input
-type = "checkbox"
-name = "privacyPolicy"
-onChange = {(e: React.FormEvent<HTMLInputElement>) => setprivacyPolicy(!privacyPolicy)}
-    />
-    < label htmlFor = "privacyPolicy" className = "ml-2" > I accept the terms of the
-<Link Link href = "/" >
-<span className="text-main cursor-pointer"> privacy policy</span>
-</Link >
-</label > */

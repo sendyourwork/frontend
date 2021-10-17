@@ -29,7 +29,8 @@ module.exports = {
       },
       colors: {
         "main": "#4158D0",
-        "highlight": "#2b2b2b"
+        "highlight": "#2b2b2b",
+        "greenLight": "#27AE60",
       },
       outline: {
         main: ['2px solid #4158D0']

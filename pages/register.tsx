@@ -3,8 +3,9 @@ import Link from 'next/link'
 import { useRef } from 'react'
 import RegisterForm from '../components/RegisterForm'
 import { useMediaQuery } from 'react-responsive'
+import withoutAuth from '../components/withoutAuth'
 
-export default function Register(): JSX.Element {
+export default withoutAuth(function Register(): JSX.Element {
     const photo = useRef<HTMLImageElement>(null)
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     return (
@@ -26,4 +27,4 @@ export default function Register(): JSX.Element {
             </div>
         </>
     )
-}
+})

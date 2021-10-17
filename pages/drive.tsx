@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useState } from "react";
 import AddFile from "../components/AddFile";
 import FilesToDownloadList from "../components/FilesToDownloadList";
+import withAuth from "../components/withAuth";
 const Drive: NextPage = () => {
     const [driveName, setDriveName] = useState('Math');
     const files = [
@@ -32,4 +33,4 @@ const Drive: NextPage = () => {
         </>
     )
 }
-export default Drive;
+export default withAuth(Drive);

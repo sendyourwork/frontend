@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import Timer from '../components/Timer'
 import LoadingSpinner from '../components/LoadingSpinner'
-import Fade from 'react-reveal/Fade'
+import withoutAuth from '../components/withoutAuth'
 
 
 const Home: NextPage = () => {
@@ -84,4 +84,4 @@ const Home: NextPage = () => {
   )
 }
 
-export default Home
+export default withoutAuth(Home);

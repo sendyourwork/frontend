@@ -6,6 +6,7 @@ import Chat from "../components/Chat";
 import FilesToDownloadList from "../components/FilesToDownloadList";
 import SendEmailForm from "../components/SendEmailForm";
 import UserInfo from "../components/UserInfo";
+import withAuth from "../components/withAuth";
 import { File } from "../interfaces/file";
 
 const Home: NextPage = () => {
@@ -54,4 +55,4 @@ const Home: NextPage = () => {
         </>
     )
 }
-export default Home;
+export default withAuth(Home);

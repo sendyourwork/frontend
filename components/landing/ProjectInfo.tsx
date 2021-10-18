@@ -13,7 +13,7 @@ export default function ProjectInfo(): JSX.Element {
                         <span className="font-bold text-4xl italic">Short video presenting our <span className="text-greenLight">{"<"}<span className="text-main">App</span> {"/>"}</span> and showing realization and our simple concept...</span>
                     </div>
                     <div className="w-full h-2/3 py-14 px-28">
-                        <iframe className="w-full h-full myShadow" src="https://www.youtube.com/embed/fqARSwfsV9w" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                        <iframe className="w-full h-full myShadowVideo" src="https://www.youtube.com/embed/fqARSwfsV9w" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     </div>
                 </div>
             </div>

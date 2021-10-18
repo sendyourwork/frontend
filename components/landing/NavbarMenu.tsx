@@ -12,7 +12,7 @@ export default function NavbarMenu({ isLoggedIn }: { isLoggedIn: boolean }): JSX
                     </Link>
                     <Link href="/drive">
                         <span className="mx-3 cursor-pointer lg:mx-5">
-                            How it works
+                            Contact
                         </span>
                     </Link>
                 </ul>

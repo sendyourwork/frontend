@@ -15,17 +15,17 @@ export default function LoginForm(): JSX.Element {
         email && password ? submitRef.current?.removeAttribute('disabled') : submitRef.current?.setAttribute('disabled', 'disabled');
     }, [email, password])
     return (
-        <form action="" className="relative flex flex-col w-96 rounded-xl myShadow z-10 bg-white" onSubmit={handleSubmit}>
+        <form className="relative flex flex-col w-96 rounded-xl myShadow z-10 bg-white" onSubmit={handleSubmit}>
             <h1 className="mx-5 mt-5 text-4xl font-bold pb-3">Profile</h1>
             <h4 className="mx-5 w-12 text-center inline-block border-b-2 border-main pb-1">Sing in</h4>
             <div className="flex flex-col py-5 items-center border-t border-gray-300">
                 <input
-                    className="focus:outline-main myShadow rounded w-10/12 h-12 my-2 py-2 pl-3.5" placeholder="E-mail"
+                    className="focus:outline-none focus:myShadowActive myShadow rounded w-10/12 h-12 my-2 py-2 pl-3.5" placeholder="E-mail"
                     type="text"
                     name="email"
                     onChange={(e: React.FormEvent<HTMLInputElement>) => setEmail(e.currentTarget.value)} />
                 <input
-                    className="rounded w-10/12 h-12 m-2 py-2 pl-3.5 myShadow focus:outline-main" placeholder="Password"
+                    className="focus:outline-none focus:myShadowActive rounded w-10/12 h-12 m-2 py-2 pl-3.5 myShadow" placeholder="Password"
                     type="password"
                     name="password"
                     onChange={(e: React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)} />

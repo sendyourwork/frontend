@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useState } from "react";
 import AddFile from "../components/AddFile";
 import FilesToDownloadList from "../components/FilesToDownloadList";
-import withAuth from "../components/withAuth";
+
 const Drive: NextPage = () => {
     const [driveName, setDriveName] = useState('Math');
     const files = [
@@ -28,9 +28,9 @@ const Drive: NextPage = () => {
                 <div className="xl:grid grid-cols-2 gap-9">
                     <AddFile />
                 </div>
-                <FilesToDownloadList files={files} />
+                <FilesToDownloadList files={files} checkIsUserAdmin/>
             </div>
         </>
     )
 }
-export default withAuth(Drive);
+export default Drive;

@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Divide as Hamburger } from 'hamburger-react'
-import { useMediaQuery } from 'react-responsive'
 import NavbarMenu from "./NavbarMenu";
 import Fade from 'react-reveal/Fade'
+import { AuthContext } from "../../pages/_app";
 
 export default function Navbar(): JSX.Element {
-    const isMenu = useMediaQuery({ query: '(max-width: 820px)' });
-    const isLoggedIn = false; //add value from react comtext
+    const { isLoggedIn } = useContext(AuthContext);
     return (
         <Fade top delay={300}>
             <div className="flex items-center w-100 h-15vh mx-3 font-montserrat lg:mx-20 bg-transparent">

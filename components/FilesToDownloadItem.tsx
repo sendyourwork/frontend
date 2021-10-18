@@ -1,6 +1,6 @@
 import { File } from "../interfaces/file";
 
-export default function FilesToDownloadItem({file: {name, size, id}}: {file: File}): JSX.Element {
+export default function FilesToDownloadItem({file: {name, size, id}, checkIsUserAdmin}: {file: File, checkIsUserAdmin: boolean}): JSX.Element {
     return (
     <div className="p-5 myShadow rounded flex">
         <div>

@@ -41,12 +41,13 @@ export default function RegisterForm(): JSX.Element {
                     <div className="flex flex-col py-5 items-center border-t border-gray-300">
                         <Field 
                             name="name" 
-                            className="focus:myShadowActive focus:outline-none rounded myShadow w-10/12 h-12 my-2 py-2 pl-3.5" 
+                            className="focus:myShadowActive focus:outline-none z-10 rounded myShadow w-10/12 h-12 my-2 py-2 pl-3.5" 
                             placeholder="Name"
+                            autoComplete="off"
                         />
                         {(errors.name && touched.name) && (
                             <Fade top>
-                                <div className="text-red-500 font-medium">{errors.name}</div>
+                                <div className="text-red-500 font-medium py-1 z-0">{errors.name}</div>
                             </Fade>
                         )}
                         <Field 
@@ -57,7 +58,7 @@ export default function RegisterForm(): JSX.Element {
                         />
                         {(errors.password && touched.password) && (
                             <Fade top>
-                                <div className="text-red-500 font-medium">{errors.password}</div>
+                                <div className="text-red-500 font-medium py-1">{errors.password}</div>
                             </Fade>
                         )}
                         <Field 
@@ -66,7 +67,11 @@ export default function RegisterForm(): JSX.Element {
                             className="focus:myShadowActive focus:outline-none rounded myShadow w-10/12 h-12 my-2 py-2 pl-3.5" 
                             placeholder="Confirm password"
                         />
-                        {errors.confirmPassword && touched.confirmPassword ? <Fade top><div className="text-red-500 font-medium">{errors.confirmPassword}</div></Fade> : null}
+                        {errors.confirmPassword && touched.confirmPassword ? 
+                            <Fade top>
+                                <div className="text-red-500 font-medium py-1">{errors.confirmPassword}</div>
+                            </Fade> 
+                        : null}
                         <Field 
                             name="schoolID" 
                             className="focus:myShadowActive focus:outline-none rounded myShadow w-10/12 h-12 my-2 py-2 pl-3.5" 
@@ -74,7 +79,7 @@ export default function RegisterForm(): JSX.Element {
                         />
                         {errors.schoolID && touched.schoolID ? 
                             <Fade top>
-                                <div className="text-red-500 font-medium">{errors.schoolID}</div>
+                                <div className="text-red-500 font-medium py-1">{errors.schoolID}</div>
                             </Fade> 
                         : null}
                         <Field 
@@ -84,7 +89,7 @@ export default function RegisterForm(): JSX.Element {
                         />
                         {errors.classID && touched.classID ? 
                             <Fade top>
-                                <div className="text-red-500 font-medium">{errors.classID}</div>
+                                <div className="text-red-500 font-medium py-1">{errors.classID}</div>
                             </Fade> 
                         : null}
                         <Field 
@@ -94,7 +99,7 @@ export default function RegisterForm(): JSX.Element {
                         />
                         {errors.email && touched.email ? 
                         <Fade top>
-                            <div className="text-red-500 font-medium">{errors.email}</div> 
+                            <div className="text-red-500 font-medium py-1">{errors.email}</div> 
                         </Fade>
                         : null}
                     </div>
@@ -112,7 +117,7 @@ export default function RegisterForm(): JSX.Element {
                         </label >
                         {errors.privacyPolicy && touched.privacyPolicy ? 
                         <Fade top>
-                            <div className="text-red-500 font-medium text-center">{errors.privacyPolicy}</div>
+                            <div className="text-red-500 font-medium text-center py-1">{errors.privacyPolicy}</div>
                         </Fade>
                         : null}
                     </div>

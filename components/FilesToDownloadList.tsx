@@ -3,7 +3,7 @@ import FilesItem from "./FilesToDownloadItem";
 
 interface IFilesList {
     files: File[],
-    checkIsUserAdmin: boolean
+    checkIsUserAdmin?: boolean
 }
 
 export default function FilesToDownloadList({files, checkIsUserAdmin = false}: IFilesList): JSX.Element {

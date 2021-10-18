@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Divide as Hamburger } from 'hamburger-react'
-import { useMediaQuery } from 'react-responsive'
 import NavbarMenu from "./NavbarMenu";
 import Fade from 'react-reveal/Fade'
+import { AuthContext } from "../../pages/_app";
 import { useState, useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 
 export default function Navbar(): JSX.Element {
+    const { isLoggedIn } = useContext(AuthContext);
     const textBox = useRef<HTMLDivElement>(null)
-    const [isOpen, setOpen] = useState(false);
     const isPhone = useMediaQuery({ query: '(max-width: 768px)' })
-    const isLoggedIn = false; //add value from react comtext
     isPhone ? textBox.current?.classList.add('mx-auto') : textBox.current?.classList.remove('mx-auto');
     return (
         <Fade top delay={300}>

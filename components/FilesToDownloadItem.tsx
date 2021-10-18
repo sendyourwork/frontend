@@ -1,14 +1,17 @@
+import { useContext } from "react";
 import { File } from "../interfaces/file";
+import { UserContext } from "../pages/_app";
 
-export default function FilesToDownloadItem({file: {name, size, id}}: {file: File}): JSX.Element {
+export default function FilesToDownloadItem({file: {name, size, id}, checkIsUserAdmin}: {file: File, checkIsUserAdmin: boolean}): JSX.Element {
+    const { role } = useContext(UserContext);
     return (
-    <div className="p-5 myShadow rounded flex">
+    <div className="p-5 myShadow rounded flex items-center">
         <div>
             <p>
                 {name}
                 <span className="text-gray-400 ml-2">{size}</span>
             </p>
-            <button className="text-blue-600 hover:text-blue-500 hover:cursor-pointer mt-2">Delete a file</button>
+            {(!checkIsUserAdmin || role === 'admin') && <button className="text-blue-600 hover:text-blue-500 hover:cursor-pointer mt-2">Delete a file</button>}
         </div>
         <button className="ml-auto bg-gray-100 hover:bg-gray-200 w-14 h-14 rounded-full flex items-center justify-center hover:cursor-pointer">
             <svg xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#4158D0"><g><rect fill="none" height="24" width="24"/></g><g><path d="M18,15v3H6v-3H4v3c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-3H18z M17,11l-1.41-1.41L13,12.17V4h-2v8.17L8.41,9.59L7,11l5,5 L17,11z"/></g></svg>

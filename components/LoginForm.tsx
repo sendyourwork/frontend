@@ -15,10 +15,13 @@ export default function LoginForm(): JSX.Element {
         event.preventDefault();
         if(username && password) {
             const loginData = await loginWithNameAndPassword(username, password);
-            if(!loginData.errors) {
+            if(!loginData.errors || !loginData) {
                 localStorage.setItem('token', loginData.accessToken);
                 setUser(loginData);
                 setIsLoggedIn(true);
+            }
+            else if(!loginData) {
+                setError("Something went wrong!")
             }
             else {
                 setError(loginData.errors[0].param + ": " + loginData.errors[0].msg);

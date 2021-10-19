@@ -2,17 +2,12 @@ import Link from 'next/link'
 
 export default function NavbarMenu({ isLoggedIn }: { isLoggedIn: boolean }): JSX.Element {
     return (
-        <div className="hidden md:flex">
+        <div className="hidden md:flex justify-center">
             <div className="flex h-max items-center text-gray-500">
                 <ul className="flex column m-0 p-0">
                     <Link href="/drive">
                         <span className="mx-3 cursor-pointer lg:mx-5">
                             About project
-                        </span>
-                    </Link>
-                    <Link href="/drive">
-                        <span className="mx-3 cursor-pointer lg:mx-5">
-                            How it works
                         </span>
                     </Link>
                 </ul>

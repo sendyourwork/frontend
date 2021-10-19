@@ -25,12 +25,15 @@ module.exports = {
       },
       height: {
         '15vh': '15vh',
+        '20vh': '20vh',
         '85vh': '85vh'
       },
       colors: {
         "main": "#4158D0",
         "highlight": "#2b2b2b",
         "greenLight": "#27AE60",
+        "yellowLight": "#FFCD1D",
+        "orangeLight": "#F98453",
       },
       outline: {
         main: ['2px solid #4158D0']

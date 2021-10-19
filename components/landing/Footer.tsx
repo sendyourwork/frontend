@@ -4,7 +4,7 @@ export default function Footer(): JSX.Element {
             <div className="w-1/2 flex justify-center">
                 <div className="flex flex-col w-max md:w-1/3">
                     <span className="font-bold text-l md:text-xl">Work<span className="text-greenLight">with</span>us</span>
-                    <span className="font-bold ml-6 mt-2 text-sm">If you're young web-dev who wanna join our team and built our app with us, mail us! </span>
+                    <span className="font-bold ml-6 mt-2 text-sm">If you&apos;re young web-dev who wanna join our team and built our app with us, mail us! </span>
                 </div>
             </div>
             <div className="w-1/2 flex justify-center">

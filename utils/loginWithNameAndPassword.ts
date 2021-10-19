@@ -1,3 +1,3 @@
 export default function loginWithNameAndPassword(email: string, password: string, name?: string, schoolID?: string, classID?: string) {
-    typeof name === undefined && typeof schoolID === undefined ? console.log(`sent to backend data: email: ${email}, password: ${password}, name: ${name}, schoolNr: ${schoolID}, classID: ${classID}`) : console.log(`sent to backend data: email: ${email}, password: ${password}`);
+    typeof name === undefined && typeof schoolID === undefined && typeof classID === undefined ? console.log(`sent to backend data: email: ${email}, password: ${password}, name: ${name}, schoolNr: ${schoolID}, classID: ${classID}`) : console.log(`sent to backend data: email: ${email}, password: ${password}`);
 }

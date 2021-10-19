@@ -3,6 +3,7 @@ import Main from '../components/landing/Main'
 import ProjectInfo from '../components/landing/ProjectInfo'
 import LoadingScreen from '../components/landing/LoadingScreen'
 import MainInfoPhone from '../components/landing/MainInfoPhone'
+import Footer from '../components/landing/Footer'
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
@@ -28,12 +29,14 @@ const Page = () => {
                         <Navbar />
                         <Main linkProps="/login" />
                         <ProjectInfo />
+                        <Footer />
                     </>
                     :
                     <>
                         <Navbar />
                         <Main linkProps="/" />
                         <MainInfoPhone />
+                        <Footer />
                     </>
             }
         </>

@@ -9,14 +9,10 @@ export const UserContext = createContext(undefined);
 function MyApp({ Component, pageProps }: AppProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const auth = { isLoggedIn, setIsLoggedIn };
-  const [userData, setUserData] = useState<User | undefined>({
-    username: 'Artiu',
-    role: 'user'
-  });
-
+  const [user, setUser] = useState<User | undefined>(undefined);
   return (
     <AuthContext.Provider value={auth}>
-      <UserContext.Provider value={userData}>
+      <UserContext.Provider value={{user, setUser}}>
         <Component {...pageProps} />
       </UserContext.Provider>
     </AuthContext.Provider>

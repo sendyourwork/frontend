@@ -1,31 +1,24 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { io } from "socket.io-client";
 import { Message } from "../interfaces/message"
+import { AuthContext, UserContext } from "../pages/_app";
+import { BACKEND_URL } from '../config';
 
 export default function Chat(): JSX.Element {
     const [inputValue, setInputValue] = useState('');
-    const [messages, setMessages] = useState<Message[]>(
-        [
-            {
-                messageId: "adadaaddad",
-                senderId: "abcd123",
-                senderIcon: "dakdaj",
-                message: "Wilczur OP"
-            },
-            {
-                messageId: "daoadjdajoda",
-                senderId: "Artiu",
-                senderIcon: "adadad",
-                message: "Wilczur Giga OP"
-            }
-        ]);
+    const [messages, setMessages] = useState<Message[]>([]);
     const formRef = useRef<HTMLFormElement | null>(null);
     const chatRef = useRef<HTMLDivElement | null>(null);
-    const clientId = "Artiu";
+    const { user } = useContext(UserContext);
+    const [socket, setSocket] = useState(null);
 
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
         if (inputValue) {
-            setMessages([...messages, { messageId: String(messages.length), senderId: clientId, message: inputValue, senderIcon: "ojaofa" }]);
+            socket.emit('chat-msg-client', {
+                msg:inputValue,
+                username: user.username
+            });
             setInputValue('');
         }
     }
@@ -44,6 +37,22 @@ export default function Chat(): JSX.Element {
         chatRef.current?.scroll({ top: chatRef.current?.scrollHeight, behavior: 'smooth' })
     }, [messages])
 
+    useEffect(() => {
+        const newSocket = io(BACKEND_URL, {
+            extraHeaders: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        newSocket.on('chat-msg-server',(msg: Message) => {
+            setMessages(prevMessages => [...prevMessages, msg]);
+        })
+        setSocket(newSocket);
+        return () => {
+            newSocket.disconnect();
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     return (
         <>
             <form
@@ -52,14 +61,14 @@ export default function Chat(): JSX.Element {
                 ref={formRef}
             >
                 <div className="flex flex-col py-2 gap-2 xl:max-h-96 overflow-auto" ref={chatRef}>
-                    {messages.map(({ messageId, senderId, senderIcon, message }: Message) => {
-                        if (clientId === senderId) {
-                            return <p className="py-2 px-4 ml-auto bg-blue-600 rounded-3xl max-w-3/4 mr-3 text-white break-words" key={messageId}>{message}</p>
+                    {messages.map(({ msg, username }: Message, index) => {
+                        if (user.username === username) {
+                            return <p className="py-2 px-4 ml-auto bg-blue-600 rounded-3xl max-w-3/4 mr-3 text-white break-words" key={index}>{msg}</p>
                         }
                         return (
-                            <div key={messageId} className="flex items-center gap-2">
+                            <div key={index} className="flex items-center gap-2">
                                 <div className="w-8 h-8 rounded-full bg-black"></div>
-                                <p className="py-2 px-4 bg-white rounded-3xl max-w-3/4 border border-gray-200 break-words">{message}</p>
+                                <p className="py-2 px-4 bg-white rounded-3xl max-w-3/4 border border-gray-200 break-words">{msg}</p>
                             </div>
                         )
                     })

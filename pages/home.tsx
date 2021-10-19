@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AddFile from "../components/AddFile";
 import Chat from "../components/Chat";
 import FilesToDownloadList from "../components/FilesToDownloadList";
@@ -8,6 +8,7 @@ import SendEmailForm from "../components/SendEmailForm";
 import UserInfo from "../components/UserInfo";
 import withAuth from "../components/withAuth";
 import { File } from "../interfaces/file";
+import { UserContext } from "./_app";
 
 const Home: NextPage = () => {
     const [searchValue, setSearchValue] = useState('');
@@ -23,6 +24,7 @@ const Home: NextPage = () => {
             size: '7 MB'
         }
     ]);
+    const { user:{ username } } = useContext(UserContext);
     return (
         <>
             <Head>
@@ -48,7 +50,7 @@ const Home: NextPage = () => {
                     </div>
                 </div>
                 <div className="flex flex-col xl:w-1/5 order-1 mb-5 xl:mb-0 xl:order-none gap-8 xl:min-h-full justify-between">
-                    <UserInfo name="Artiu"/>
+                    <UserInfo name={username}/>
                     <Chat />
                 </div>
             </div>

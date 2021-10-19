@@ -1,3 +1,13 @@
-export default function loginWithNameAndPassword(email: string, password: string, name?: string, schoolID?: string, classID?: string) {
-    typeof name === undefined && typeof schoolID === undefined ? console.log(`sent to backend data: email: ${email}, password: ${password}, name: ${name}, schoolNr: ${schoolID}, classID: ${classID}`) : console.log(`sent to backend data: email: ${email}, password: ${password}`);
+import { BACKEND_URL } from "../config";
+
+export default function loginWithNameAndPassword(username: string, password: string) {
+    return fetch(BACKEND_URL + "/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({username, password}),
+    })
+    .then(response => response.json())
+    .catch(err => ({ errors: [{ msg: err }]}));
 }

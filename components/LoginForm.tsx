@@ -1,34 +1,51 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import loginWithNameAndPassword from "../utils/loginWithNameAndPassword";
 import Link from 'next/link'
-import { useMediaQuery } from 'react-responsive'
+import { AuthContext, UserContext } from "../pages/_app";
 
 export default function LoginForm(): JSX.Element {
     const submitRef = useRef<HTMLInputElement>(null)
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const handleSubmit = (event: React.SyntheticEvent) => {
+    const [error, setError] = useState<string | null>(null);
+    const { setUser } = useContext(UserContext);
+    const { setIsLoggedIn } = useContext(AuthContext);
+
+    const handleSubmit = async (event: React.SyntheticEvent) => {
         event.preventDefault();
-        email && password ? loginWithNameAndPassword(email, password) : false;
+        if(username && password) {
+            const loginData = await loginWithNameAndPassword(username, password);
+            if(!loginData.errors) {
+                localStorage.setItem('token', loginData.accessToken);
+                setUser(loginData);
+                setIsLoggedIn(true);
+            }
+            else {
+                setError(loginData.errors[0].param + ": " + loginData.errors[0].msg);
+            }
+        }
     }
     useEffect(() => {
-        email && password ? submitRef.current?.removeAttribute('disabled') : submitRef.current?.setAttribute('disabled', 'disabled');
-    }, [email, password])
+        username && password ? submitRef.current?.removeAttribute('disabled') : submitRef.current?.setAttribute('disabled', 'disabled');
+    }, [username, password])
     return (
         <form className="relative flex flex-col w-96 rounded-xl myShadow z-10 bg-white" onSubmit={handleSubmit}>
             <h1 className="mx-5 mt-5 text-4xl font-bold pb-3">Profile</h1>
             <h4 className="mx-5 w-12 text-center inline-block border-b-2 border-main pb-1">Sing in</h4>
             <div className="flex flex-col py-5 items-center border-t border-gray-300">
                 <input
-                    className="focus:outline-none focus:myShadowActive myShadow rounded w-10/12 h-12 my-2 py-2 pl-3.5" placeholder="E-mail"
+                    className="focus:outline-none focus:myShadowActive myShadow rounded w-10/12 h-12 my-2 py-2 pl-3.5" 
+                    placeholder="Username"
                     type="text"
-                    name="email"
-                    onChange={(e: React.FormEvent<HTMLInputElement>) => setEmail(e.currentTarget.value)} />
+                    value={username}
+                    onChange={(e: React.FormEvent<HTMLInputElement>) => setUsername(e.currentTarget.value)} />
                 <input
-                    className="focus:outline-none focus:myShadowActive rounded w-10/12 h-12 m-2 py-2 pl-3.5 myShadow" placeholder="Password"
+                    className="focus:outline-none focus:myShadowActive rounded w-10/12 h-12 m-2 py-2 pl-3.5 myShadow" 
+                    placeholder="Password"
                     type="password"
-                    name="password"
+                    value={password}
                     onChange={(e: React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)} />
+                {error && <p className="text-red-500 text-sm font-medium">{error}</p>}
             </div>
             <input
                 className="bg-main rounded text-white mt-5 mx-12 h-10 disabled:cursor-default cursor-pointer disabled:bg-gray-300"

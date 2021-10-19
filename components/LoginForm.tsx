@@ -48,7 +48,7 @@ export default function LoginForm(): JSX.Element {
                     type="password"
                     value={password}
                     onChange={(e: React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value)} />
-                {error && <p className="text-red-500 text-sm font-medium">{error}</p>}
+                {error && <p className="text-red-500 font-medium text-center">{error}</p>}
             </div>
             <input
                 className="bg-main rounded text-white mt-5 mx-12 h-10 disabled:cursor-default cursor-pointer disabled:bg-gray-300"

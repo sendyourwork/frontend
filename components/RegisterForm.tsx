@@ -1,12 +1,13 @@
-import React from "react"
-import loginWithNameAndPassword from "../utils/loginWithNameAndPassword";
+import React, { useContext, useState } from "react"
 import Link from 'next/link'
 import * as Yup from 'yup';
 import { Formik, Form, Field } from "formik";
 import Fade from "react-reveal/Fade";
+import register from "../utils/register";
+import { AuthContext, UserContext } from "../pages/_app";
 
 const SignupSchema = Yup.object().shape({
-    name: Yup.string().min(1, 'Too short!').required('Name is required!'),
+    username: Yup.string().min(1, 'Too short!').required('Name is required!'),
     password: Yup.string().min(6, 'Too short!').required('Password is required!'),
     confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match'),
     schoolID: Yup.string().max(5, 'Too long!').required('School ID is required!'),
@@ -16,14 +17,28 @@ const SignupSchema = Yup.object().shape({
 })
 
 export default function RegisterForm(): JSX.Element {
-    const handleSubmit = (values) => {
-
+    const { setIsLoggedIn } = useContext(AuthContext);
+    const { setUser } = useContext(UserContext);
+    const [error, setError] = useState(null);
+    const handleSubmit = async (values) => {
+        const response = await register(values);
+        if(!response.errors || !response) {
+            localStorage.setItem('token', response.accessToken);
+            setUser(response);
+            setIsLoggedIn(true);
+        }
+        else if(!response) {
+            setError("Something went wrong!")
+        }
+        else {
+            setError(response.errors[0].param + ": " + response.errors[0].msg);
+        }
     }
     
     return (
         <Formik 
         initialValues={{
-            name: '',
+            username: '',
             password: '',
             confirmPassword: '',
             schoolID: '',
@@ -40,7 +55,7 @@ export default function RegisterForm(): JSX.Element {
                     <h4 className="mx-5 w-14 text-center inline-block border-b-2 border-main pb-1">Sign up</h4>
                     <div className="flex flex-col py-5 items-center border-t border-gray-300">
                         <Field 
-                            name="name" 
+                            name="username" 
                             className="focus:myShadowActive focus:outline-none z-10 rounded myShadow w-10/12 h-12 my-2 py-2 pl-3.5" 
                             placeholder="Name"
                             autoComplete="off"
@@ -120,10 +135,11 @@ export default function RegisterForm(): JSX.Element {
                             <div className="text-red-500 z-0 font-medium text-center py-1">{errors.privacyPolicy}</div>
                         </Fade>
                         : null}
+                        {error && <div className="text-red-500 font-medium text-center">{error}</div>}
                     </div>
                     <button type="submit" className="bg-main rounded text-white mt-5 mx-12 h-10">Submit</button>
                     <Link href="/login">
-                        <span className="cursor-pointer text-center text-main mt-6 pb-8">You already have account? Sign in!</span>
+                        <span className="cursor-pointer text-main mt-6 mb-8 w-max mx-auto">You already have account? Sign in!</span>
                     </Link>
                 </Form>
             )}

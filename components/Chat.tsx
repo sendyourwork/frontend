@@ -34,7 +34,7 @@ export default function Chat(): JSX.Element {
         if (messages.length > 200) {
             setMessages(messages.slice(1));
         }
-        chatRef.current?.scroll({ top: chatRef.current?.scrollHeight, behavior: 'smooth' })
+        chatRef.current?.scrollTo({ top: chatRef.current?.scrollHeight, behavior: 'smooth' })
     }, [messages])
 
     useEffect(() => {
@@ -66,9 +66,9 @@ export default function Chat(): JSX.Element {
                             return <p className="py-2 px-4 ml-auto bg-blue-600 rounded-3xl max-w-3/4 mr-3 text-white break-words" key={index}>{msg}</p>
                         }
                         return (
-                            <div key={index} className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-full bg-black"></div>
-                                <p className="py-2 px-4 bg-white rounded-3xl max-w-3/4 border border-gray-200 break-words">{msg}</p>
+                            <div key={index}>
+                                {username !== messages[index - 1]?.username && <p className="text-gray-500 text-sm">{username}</p>}
+                                <p className="py-2 px-4 bg-white w-max rounded-3xl max-w-3/4 border border-gray-200 break-words">{msg}</p>
                             </div>
                         )
                     })

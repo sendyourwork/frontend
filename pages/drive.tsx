@@ -3,21 +3,19 @@ import Head from "next/head";
 import { useState } from "react";
 import AddFile from "../components/AddFile";
 import FilesToDownloadList from "../components/FilesToDownloadList";
+import { File } from "../interfaces/file";
 
 const Drive: NextPage = () => {
     const [driveName, setDriveName] = useState('Math');
-    const files = [
-        {
-            id: '34rdsads',
-            name: 'something.mp4',
-            size: '7 MB'
-        },
-        {
-            id: '34sdsads',
-            name: 'something.mp4',
-            size: '7 MB'
-        }
-    ];
+    const [files, setFiles] = useState([]);
+
+    const addFile = (newFiles: File[]) => {
+        setFiles([...files, ...newFiles]);
+    }
+    const removeFile = (name: string) => {
+        setFiles(files.filter((item) => item.name !== name));
+    }
+
     return (
         <>
             <Head>
@@ -26,9 +24,9 @@ const Drive: NextPage = () => {
             <div className="py-14 px-12 w-full xl:w-3/4">
                 <h1 className="text-center xl:text-left text-5xl font-bold mb-8">Send<span className="text-main">Your</span>Work | {driveName}</h1>
                 <div className="xl:grid grid-cols-2 gap-9">
-                    <AddFile />
+                    <AddFile add={addFile}/>
                 </div>
-                <FilesToDownloadList files={files} checkIsUserAdmin/>
+                <FilesToDownloadList files={files} remove={removeFile} checkIsUserAdmin/>
             </div>
         </>
     )

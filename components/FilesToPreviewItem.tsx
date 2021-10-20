@@ -1,3 +1,4 @@
+import formatFileSize from "../helpers/formatFileSize";
 import FilePreview from "./FilePreview";
 
 interface FilesToPreviewItemProps {
@@ -5,9 +6,7 @@ interface FilesToPreviewItemProps {
     remove: () => void
 }
 export default function FilesToPreviewItem({file, remove}: FilesToPreviewItemProps): JSX.Element {
-    const sizeInMB = Math.round(file.size/(1024*1024));
-    const sizeInKB = Math.round(file.size/1024);
-    const formatedSize = sizeInMB ? sizeInMB + " MB" : sizeInKB + " KB";
+    const formatedSize = formatFileSize(file.size);
     
     return (
     <div className="py-2 pl-2 pr-4 myShadow rounded flex items-center gap-2">

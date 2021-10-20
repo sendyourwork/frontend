@@ -12,18 +12,10 @@ import { UserContext } from "./_app";
 
 const Home: NextPage = () => {
     const [searchValue, setSearchValue] = useState('');
-    const [files, setFiles] = useState<File[]>([
-        {
-            id:'34rdsads',
-            name: 'something.mp4',
-            size: '7 MB'
-        },
-        {
-            id:'34sdsads',
-            name: 'something.mp4',
-            size: '7 MB'
-        }
-    ]);
+    const [files, setFiles] = useState<File[]>([]);
+    const addFile = (newFiles: File[]) => {
+        setFiles([...files, ...newFiles]);
+    }
     const { user:{ username } } = useContext(UserContext);
     return (
         <>
@@ -42,7 +34,7 @@ const Home: NextPage = () => {
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
                             />
                         </div>
-                        <AddFile />
+                        <AddFile add={addFile}/>
                     </div>
                     <FilesToDownloadList files={files}/>
                     <div className="w-full xl:w-5/12">

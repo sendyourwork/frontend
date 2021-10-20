@@ -1,12 +1,15 @@
 import React, { useRef, useState } from "react";
 import { checkIsFilesSizeNotTooBig } from '../helpers/checkIsFileSizeNotTooBig';
-
+import publicFileUpload from "../utils/publicFileUpload";
+import { File } from '../interfaces/file';
+import LoadingSpinner from "./LoadingSpinner";
 type AddFileProps = {
-    add?: (newFiles: File[]) => void
+    add: (newFiles: File[]) => void
 }
 export default function AddFile({add}: AddFileProps): JSX.Element {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [error, setError] = useState('');
+    const [isUploading, setIsUploading] = useState(false);
     const [addFileViewVisible, setAddFileViewVisible] = useState(false);
     let enterTarget: EventTarget | null = null;
 
@@ -22,34 +25,24 @@ export default function AddFile({add}: AddFileProps): JSX.Element {
         }
         return false;
     }
-    const FileListToFile = (files: FileList): File[] => {
-        const newFiles = [];
-        for(let i = 0; i < files.length; i++){
-            newFiles.push(files[i]);
-        }
-        return newFiles;
-    }
-    const checkAndSend = (files: FileList | null) => {
+    const checkAndSend = async (files: FileList | null) => {
         if(files && files.length){
             if(checkIsFilesSizeNotTooBig(files)){
                 setError("");
-                if(!checkIsFolder(files)) {
-                    const filesArray = FileListToFile(files);
-                    if(add) {
-                        add(filesArray); 
+                if(!checkIsFolder(files)) {  
+                    setIsUploading(true);           
+                    const filesToSend = new FormData();
+                    for(let i = 0; files.length > i; i++){
+                        filesToSend.append("files", files[i]);
+                    }
+                    const response = await publicFileUpload(filesToSend);
+                    if(response?.status) {
+                        add(response.data);
+                        setIsUploading(false);
                     }
                     else {
-                        // console.log(filesArray);                
-                        // const filesToSend = new FormData();
-                        // for(let i = 0; files.length > i; i++){
-                        //     filesToSend.append(String(i), files[i]);
-                        // }
-                        // fetch('https://localhost:3001', {
-                        //     method:'POST',
-                        //     body: filesToSend
-                        // })
-                        //we have file in binary code here, idk is this will work correctly
-                        //send to backend
+                        setError(response.message || "Something went wrong!");
+                        setIsUploading(false);
                     }
                 }
                 else {
@@ -97,6 +90,7 @@ export default function AddFile({add}: AddFileProps): JSX.Element {
         checkAndSend(files);
     }
 
+
     return (
         <div
             onDrop={handleDrop}
@@ -117,6 +111,11 @@ export default function AddFile({add}: AddFileProps): JSX.Element {
             <div className="absolute w-full h-full flex items-center justify-center top-0 left-0 bg-white border-2 border-black border-dashed rounded">
                 <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px" fill="#000000"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
             </div>
+            }
+            {isUploading &&
+                <div className="absolute left-0 top-0 w-full h-full bg-white bg-opacity-80 flex items-center justify-center">
+                    <LoadingSpinner />
+                </div>
             }
         </div>
     )

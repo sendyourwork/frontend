@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
 import { checkIsFilesSizeNotTooBig } from '../helpers/checkIsFileSizeNotTooBig';
-import publicFileUpload from "../utils/publicFileUpload";
-import { File } from '../interfaces/file';
+import { File as FileI } from '../interfaces/file';
 import LoadingSpinner from "./LoadingSpinner";
 type AddFileProps = {
-    add: (newFiles: File[]) => void
+    add: (newFiles: FileI[] | File[]) => void,
+    fetchFunction?: (files: FormData) => Promise<any>
 }
-export default function AddFile({add}: AddFileProps): JSX.Element {
+export default function AddFile({add, fetchFunction}: AddFileProps): JSX.Element {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [error, setError] = useState('');
     const [isUploading, setIsUploading] = useState(false);
@@ -30,19 +30,28 @@ export default function AddFile({add}: AddFileProps): JSX.Element {
             if(checkIsFilesSizeNotTooBig(files)){
                 setError("");
                 if(!checkIsFolder(files)) {  
-                    setIsUploading(true);           
-                    const filesToSend = new FormData();
-                    for(let i = 0; files.length > i; i++){
-                        filesToSend.append("files", files[i]);
-                    }
-                    const response = await publicFileUpload(filesToSend);
-                    if(response?.status) {
-                        add(response.data);
-                        setIsUploading(false);
+                    if(fetchFunction) {  
+                        setIsUploading(true);         
+                        const filesToSend = new FormData();
+                        for(let i = 0; files.length > i; i++){
+                            filesToSend.append("files", files[i]);
+                        }
+                        const response = await fetchFunction(filesToSend);
+                        if(response?.status) {
+                            add(response.data);
+                            setIsUploading(false);
+                        }
+                        else {
+                            setError(response.message || "Something went wrong!");
+                            setIsUploading(false);
+                        }
                     }
                     else {
-                        setError(response.message || "Something went wrong!");
-                        setIsUploading(false);
+                        const filesToAdd = [];
+                        for(let i = 0; files.length > i; i++){
+                            filesToAdd.push(files[i]);
+                        }
+                        add(filesToAdd);
                     }
                 }
                 else {

@@ -7,15 +7,22 @@ import FilesToDownloadList from "../components/FilesToDownloadList";
 import SendEmailForm from "../components/SendEmailForm";
 import UserInfo from "../components/UserInfo";
 import withAuth from "../components/withAuth";
-import { File } from "../interfaces/file";
+import { File as FileI } from "../interfaces/file";
+import homeDriveFileRemove from "../utils/homeDriveFileRemove";
+import homeDriveUpload from "../utils/homeDriveFileUpload";
 import { UserContext } from "./_app";
 
 const Home: NextPage = () => {
     const [searchValue, setSearchValue] = useState('');
-    const [files, setFiles] = useState<File[]>([]);
-    const addFile = (newFiles: File[]) => {
-        setFiles([...files, ...newFiles]);
+    const [files, setFiles] = useState<FileI[]>([]);
+    const addFile = (newFiles: FileI[]) => {
+        setFiles([...newFiles, ...files]);
     }
+    
+    const removeFile = (name: string) => {
+        setFiles(files.filter((item) => item.name !== name));
+    }
+
     const { user:{ username } } = useContext(UserContext);
     return (
         <>
@@ -34,9 +41,9 @@ const Home: NextPage = () => {
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchValue(e.target.value)}
                             />
                         </div>
-                        <AddFile add={addFile}/>
+                        <AddFile add={addFile} fetchFunction={homeDriveUpload}/>
                     </div>
-                    <FilesToDownloadList files={files}/>
+                    <FilesToDownloadList files={files} remove={removeFile} removeFetchFunction={homeDriveFileRemove}/>
                     <div className="w-full xl:w-5/12">
                         <SendEmailForm />
                     </div>

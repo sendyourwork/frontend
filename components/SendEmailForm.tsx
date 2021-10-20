@@ -42,7 +42,7 @@ export default function SendEmailForm(): JSX.Element {
                     className="outline-none h-8 z-0"
                 />
             </div>
-            <AddFile add={addFiles}/>
+            <AddFile add={addFiles} shouldFetch={false}/>
             {files.length > 0 && <FilesToPreviewList remove={removeFile} files={files}/>}
             {error && <p className="text-red-600 text-center">{error}</p>}
             <button type="submit" className="w-28 xl:ml-auto bg-blue-600 hover:bg-blue-700 text-white rounded-3xl flex px-5 py-3 gap-2">

@@ -27,7 +27,7 @@ const Home: NextPage = () => {
     socket.on('sID', ({ id }) => {
       setSocketId(id);
     })
-    socket.on('qr-scanned', (data) => {
+    socket.on('user', (data) => {
       console.log(data);
       
       localStorage.setItem('token', data.accessToken);

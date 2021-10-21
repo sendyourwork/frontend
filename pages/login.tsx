@@ -28,8 +28,10 @@ const Home: NextPage = () => {
       setSocketId(id);
     })
     socket.on('qr-scanned', (data) => {
-      localStorage.setItem('token', data.token);
-      setUser(data.user);
+      console.log(data);
+      
+      localStorage.setItem('token', data.accessToken);
+      setUser(data);
       setIsLoggedIn(true);
     })
     return () => {

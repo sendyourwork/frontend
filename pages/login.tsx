@@ -4,15 +4,17 @@ import { useMediaQuery } from 'react-responsive'
 import GenerateQRCode from '../components/GenerateQRCode'
 import LoginForm from '../components/LoginForm'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
-import Timer from '../components/Timer'
-import LoadingSpinner from '../components/LoadingSpinner'
+import { useContext, useEffect, useRef, useState } from 'react'
 import withoutAuth from '../components/withoutAuth'
+import { io } from 'socket.io-client'
+import { BACKEND_URL } from '../config'
+import { AuthContext, UserContext } from './_app'
 
 
 const Home: NextPage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [sessionId, setSessionId] = useState<string>(null);
+  const [socketId, setSocketId] = useState<string>(null);
+  const { setUser } = useContext(UserContext);
+  const { setIsLoggedIn } = useContext(AuthContext);
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
   const isRectangle = useMediaQuery({ query: '(max-width: 1440px)' });
   const photo = useRef<HTMLImageElement>(null)
@@ -20,24 +22,20 @@ const Home: NextPage = () => {
   isRectangle ? photo.current?.classList.add('left-12') : photo.current?.classList.remove('left-12')
   isRectangle ? photo.current?.classList.add('w-3/5') : photo.current?.classList.remove('w-3/5')
 
-  const getNewSessionId = () => {
-    setIsLoading(true);
-    //get new session from backend
-    let text = "";
-    for (let i = 0; i < 10; i++) {
-      text += String(Math.floor(Math.random() * i));
-    }
-    setSessionId(text);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500)
-  }
-
   useEffect(() => {
-    if (sessionId === null) {
-      getNewSessionId();
+    const socket = io(BACKEND_URL + "/qr");
+    socket.on('sID', ({ id }) => {
+      setSocketId(id);
+    })
+    socket.on('qr-scanned', (data) => {
+      localStorage.setItem('token', data.token);
+      setUser(data.user);
+      setIsLoggedIn(true);
+    })
+    return () => {
+      socket.disconnect();
     }
-  }, [sessionId])
+  }, [])
 
   return (
     <>
@@ -54,29 +52,11 @@ const Home: NextPage = () => {
           <img src="/close.svg" className="cursor-pointer absolute right-10 top-10" />
         </Link>
         <LoginForm />
-        {/* {
-          !isMobile &&
-          (isLoading ?
-            <LoadingSpinner />
-            :
-            <div className="flex flex-col w-auto bg-white items-center justify-between rounded-xl myShadow pb-2">
-              <h1 className="text-4xl font-bold m-5">Sign in with QR</h1>
-              <GenerateQRCode text={sessionId} />
-              <p>QR code expires in <Timer time={5 * 60} taskAfter={() => setSessionId(null)} /></p>
-            </div>)
-        } */}
         {
           !isMobile &&
           <div className="flex flex-col h-5/12 w-auto bg-white items-center justify-between rounded-xl myShadow pb-2">
             <h1 className="text-4xl font-bold m-5">Sign in with QR</h1>
-            {isLoading ?
-              <LoadingSpinner />
-              :
-              <>
-                <GenerateQRCode text={sessionId} />
-                <p>QR code expires in <Timer time={5 * 60} taskAfter={() => setSessionId(null)} /></p>
-              </>
-            }
+            <GenerateQRCode text={socketId} />
           </div>
         }
       </div>

@@ -1,6 +1,6 @@
 export default function ProjectInfo(): JSX.Element {
     return (
-        <div className="flex h-screen relative font-montserrat">
+        <div className="flex h-screen relative font-montserrat" id="projectInfo">
             <img src="/images/Star 6.svg" className="left-12 top-20 absolute hidden lg:block" />
             <img src="/images/Rectangle90.svg" className="bottom-10 left-40 absolute hidden lg:block" />
             <img src="/images/Rectangle93.svg" className="top-8 right-52 absolute hidden lg:block" />

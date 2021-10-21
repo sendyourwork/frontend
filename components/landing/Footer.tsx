@@ -14,6 +14,7 @@ export default function Footer(): JSX.Element {
                         <li className="">Mail<span className="text-greenLight">: </span>contact@sendyourwork.com</li>
                         <li className="">Facebook<span className="text-yellowLight">: </span><span className="italic">Soon!</span></li>
                         <li className="">Phone<span className="text-orangeLight">: </span><span className="italic">Soon!</span></li>
+                        <li className="">Twitter<span className="text-main">: </span><span className="italic">Soon!</span></li>
                     </ul>
                 </div>
             </div>

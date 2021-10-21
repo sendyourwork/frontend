@@ -5,11 +5,11 @@ export default function NavbarMenu({ isLoggedIn }: { isLoggedIn: boolean }): JSX
         <div className="hidden md:flex justify-center">
             <div className="flex h-max items-center text-gray-500">
                 <ul className="flex column m-0 p-0">
-                    <Link href="/drive">
-                        <span className="mx-3 cursor-pointer lg:mx-5">
+                    <span className="mx-3 cursor-pointer lg:mx-5">
+                        <a href="#projectInfo">
                             About project
-                        </span>
-                    </Link>
+                        </a>
+                    </span>
                 </ul>
             </div>
             <div className="flex ml-6 h-max">

@@ -8,7 +8,7 @@ interface IFilesList {
     removeFetchFunction?: (name: string, username: string) => Promise<any>
 }
 
-export default function FilesToDownloadList({files, checkIsUserAdmin = false, remove, removeFetchFunction}: IFilesList): JSX.Element {
+export default function FilesToDownloadList({ files, checkIsUserAdmin = false, remove, removeFetchFunction }: IFilesList): JSX.Element {
     return (
         <div className="py-16 flex flex-col xl:grid grid-cols-2 gap-9">
             {files.map((file: File, index) => {

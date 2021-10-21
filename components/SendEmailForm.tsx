@@ -29,32 +29,37 @@ export default function SendEmailForm(): JSX.Element {
         }
     }
     const handleSubmit = async () => {
-        setIsSending(true);
-        const reader = new FileReader();
-        reader.readAsDataURL(files[0]);
-        reader.onload = async () => {
-            const response = await sendEmailToTeacher({
-                username, 
-                school_class, 
-                topic: title, 
-                subject_name: subject,
-                filename: files[0].name,
-                filecontent: reader.result.toString().replace(/^data:(.*,)?/, '')
-            });
-            if(response === "OK") {
-                setIsSentSuccessFully(true);
-                setTimeout(() => {
-                    setIsSentSuccessFully(false);
-                }, 5000);
-                setFiles([]);
-                setTitle('');
-                setError(null);
-                setIsSending(false);
+        if(title && subject && files.length > 0) {
+            setIsSending(true);
+            const reader = new FileReader();
+            reader.readAsDataURL(files[0]);
+            reader.onload = async () => {
+                const response = await sendEmailToTeacher({
+                    username, 
+                    school_class, 
+                    topic: title, 
+                    subject_name: subject,
+                    filename: files[0].name,
+                    filecontent: reader.result.toString().replace(/^data:(.*,)?/, '')
+                });
+                if(response === "OK") {
+                    setIsSentSuccessFully(true);
+                    setTimeout(() => {
+                        setIsSentSuccessFully(false);
+                    }, 5000);
+                    setFiles([]);
+                    setTitle('');
+                    setError(null);
+                    setIsSending(false);
+                }
+                else {
+                    setError(response);
+                    setIsSending(false);
+                }
             }
-            else {
-                setError(response);
-                setIsSending(false);
-            }
+        }
+        else {
+            setError("Title, subject and file are required!");
         }
     }
     const addFiles = (newFiles: File[]) => {

@@ -6,6 +6,7 @@ import sendEmailToTeacher from "../utils/sendEmailToTeacher";
 import AddFile from "./AddFile";
 import FilesToPreviewList from "./FilesToPreviewList";
 import LoadingSpinner from "./LoadingSpinner";
+import Select from 'react-select'
 
 export default function SendEmailForm(): JSX.Element {
     const defaultSubject = 'math';
@@ -15,13 +16,27 @@ export default function SendEmailForm(): JSX.Element {
     const [error, setError] = useState<string | null>(null);
     const [isSending, setIsSending] = useState(false);
     const [sentSuccessFully, setIsSentSuccessFully] = useState(false);
-    const { user: {username, school_class} } = useContext(UserContext);
-    
+    const { user: { username, school_class } } = useContext(UserContext);
+    const customStyles = {
+        option: (provided, state) => ({
+            ...provided,
+            fontWeight: '600',
+            backgroundColor: state.isSelected ? '#5975ff' : 'white',
+            color: state.isSelected ? 'white' : '#4158D0',
+        }),
+    }
+    const options = [
+        { value: 'Math', label: 'Math' },
+        { value: 'Geography', label: 'Geography' },
+        { value: 'Physics', label: 'Physics' },
+        { value: 'PE', label: 'PE' },
+        { value: 'Computer Science', label: 'Computer Science' },
+    ]
     const removeFile = (index: number) => {
         setFiles(files.filter((_, fileIndex) => fileIndex !== index));
     }
     const checkIsFilesNotTooBig = () => {
-        if(!checkIsFilesSizeNotTooBig(files) && files.length > 0) {
+        if (!checkIsFilesSizeNotTooBig(files) && files.length > 0) {
             setError("Your files weights more than 10 MB!");
         }
         else {
@@ -29,20 +44,20 @@ export default function SendEmailForm(): JSX.Element {
         }
     }
     const handleSubmit = async () => {
-        if(title && subject && files.length > 0) {
+        if (title && subject && files.length > 0) {
             setIsSending(true);
             const reader = new FileReader();
             reader.readAsDataURL(files[0]);
             reader.onload = async () => {
                 const response = await sendEmailToTeacher({
-                    username, 
-                    school_class, 
-                    topic: title, 
+                    username,
+                    school_class,
+                    topic: title,
                     subject_name: subject,
                     filename: files[0].name,
                     filecontent: reader.result.toString().replace(/^data:(.*,)?/, '')
                 });
-                if(response === "OK") {
+                if (response === "OK") {
                     setIsSentSuccessFully(true);
                     setTimeout(() => {
                         setIsSentSuccessFully(false);
@@ -68,15 +83,15 @@ export default function SendEmailForm(): JSX.Element {
 
     useEffect(() => {
         checkIsFilesNotTooBig();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [files])
     return (
         <div className="relative flex flex-col gap-5">
-            <select onChange={(e) => setSubject(e.target.value)}>
-                <option value="math">Math</option>
-                <option value="english">English</option>
-                <option value="INZ02.02">INZ</option>
-            </select>
+            <Select
+                placeholder='Pick class:'
+                options={options}
+                styles={customStyles}
+            />
             <div className="w-full h-16 px-5 myShadow flex flex-col justify-center rounded">
                 {title && <p className="text-sm text-gray-400 z-10">Title</p>}
                 <input
@@ -88,13 +103,13 @@ export default function SendEmailForm(): JSX.Element {
                 />
             </div>
             <AddFile add={addFiles} />
-            {files.length > 0 && <FilesToPreviewList remove={removeFile} files={files}/>}
+            {files.length > 0 && <FilesToPreviewList remove={removeFile} files={files} />}
             {error && <p className="text-red-600 text-center">{error}</p>}
             <button onClick={handleSubmit} className="w-28 xl:ml-auto bg-blue-600 hover:bg-blue-700 text-white rounded-3xl flex px-5 py-3 gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4.01 6.03l7.51 3.22-7.52-1 .01-2.22m7.5 8.72L4 17.97v-2.22l7.51-1M2.01 3L2 10l15 2-15 2 .01 7L23 12 2.01 3z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M4.01 6.03l7.51 3.22-7.52-1 .01-2.22m7.5 8.72L4 17.97v-2.22l7.51-1M2.01 3L2 10l15 2-15 2 .01 7L23 12 2.01 3z" /></svg>
                 <span>Send</span>
             </button>
-            {isSending && 
+            {isSending &&
                 <div className="absolute left-0 top-0 w-full h-full bg-white bg-opacity-80 flex items-center justify-center">
                     <LoadingSpinner />
                 </div>

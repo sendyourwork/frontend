@@ -1,13 +1,13 @@
 import { useMediaQuery } from 'react-responsive'
 import Fade from 'react-reveal/Fade'
 import Link from 'next/link'
-import { Props } from 'react'
 
 interface LinkButtonProps {
     linkProps: string,
 }
 
 export default function Main({ linkProps }: LinkButtonProps): JSX.Element {
+    const isPhone = useMediaQuery({ query: '(max-width: 768px)' })
     return (
         <main className="flex h-85vh font-montserrat relative flex-col lg:flex-row items-center xl:items-start overflow-x-hidden">
             <Fade top delay={300}>
@@ -23,9 +23,16 @@ export default function Main({ linkProps }: LinkButtonProps): JSX.Element {
                         <span className="font-montserrat font-extrabold text-4xl md:text-6xl">Send your homework safe and simple</span>
                         <span className="mt-4 text-m font-medium">We are help education in the world. We make world a better place.</span>
                         <div className="mt-4">
-                            <Link href={linkProps} passHref={true}>
-                                <button className="bg-main text-white text-sm md:text-base rounded h-8 w-24 font-normal md:h-10 md:w-32">Get started</button>
-                            </Link>
+                            {!isPhone ?
+                                <Link href={linkProps} passHref={true}>
+                                    <button className="bg-main text-white text-sm md:text-base rounded h-8 w-24 font-normal md:h-10 md:w-32">Get Started</button>
+                                </Link>
+                                :
+                                <button className="bg-main text-white text-sm rounded h-8 w-24 font-normal">
+                                    <a href="#downloadInfo">Get Started</a>
+                                </button>
+                            }
+
                         </div>
                     </div>
                 </div>

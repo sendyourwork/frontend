@@ -41,7 +41,8 @@ export default function Chat(): JSX.Element {
         const newSocket = io(BACKEND_URL, {
             extraHeaders: {
                 Authorization: "Bearer " + localStorage.getItem('token')
-            }
+            },
+            forceNew: true
         });
         newSocket.on('chat-msg-server',(msg: Message) => {
             setMessages(prevMessages => [...prevMessages, msg]);

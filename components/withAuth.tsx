@@ -10,7 +10,7 @@ const withAuth = Component => {
             if (!isLoggedIn) {
                 router.replace('/login');
             }
-        }, [])
+        })
         if(isLoggedIn) return (
             <Component {...props} />
         );

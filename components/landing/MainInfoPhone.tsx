@@ -1,6 +1,6 @@
 export default function MainInfoPhone(): JSX.Element {
     return (
-        <div className="relative flex flex-col justify-center items-center h-screen font-montserrat">
+        <div className="relative flex flex-col justify-center items-center h-screen font-montserrat mt-24 md:mt-0" id="downloadInfo">
             <img src="/images/Star 8.svg" className="absolute top-24 right-12" />
             <img src="/images/Circle91.svg" className="absolute w-16 top-2 left-12" />
             <img src="/images/Rectangle94.svg" className="w-16 absolute bottom-12 left-12" />

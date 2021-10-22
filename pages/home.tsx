@@ -10,6 +10,7 @@ import withAuth from "../components/withAuth";
 import { File as FileI } from "../interfaces/file";
 import homeDriveFileRemove from "../utils/homeDriveFileRemove";
 import homeDriveUpload from "../utils/homeDriveFileUpload";
+import homeDriveGetFiles from "../utils/homeDriveGetFiles";
 import { UserContext } from "./_app";
 
 const Home: NextPage = () => {
@@ -24,13 +25,13 @@ const Home: NextPage = () => {
     }
 
     const { user: { username } } = useContext(UserContext);
-    // loading
-    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 1500)
-    })
+        (async() => {
+            const data = await homeDriveGetFiles(username);
+            setFiles(data);
+        })()
+    }, [])
     return (
         <>
             <Head>

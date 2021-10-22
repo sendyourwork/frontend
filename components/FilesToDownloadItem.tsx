@@ -13,7 +13,7 @@ interface FilesToDownloadProps {
     removeFetchFunction: (name: string, username: string) => Promise<any>,
 }
 
-export default function FilesToDownloadItem({ file: { name, size, id }, checkIsUserAdmin, remove, removeFetchFunction = undefined }: FilesToDownloadProps): JSX.Element {
+export default function FilesToDownloadItem({ file: { name, size }, checkIsUserAdmin, remove, removeFetchFunction = undefined }: FilesToDownloadProps): JSX.Element {
     const { user: { role, username } } = useContext(UserContext);
     const [isDeleting, setIsDeleting] = useState(false);
     const [error, setError] = useState(null);
@@ -28,8 +28,8 @@ export default function FilesToDownloadItem({ file: { name, size, id }, checkIsU
             }
             else {
                 setError(response);
-                setIsDeleting(false);
             }
+            setIsDeleting(false);
         }
     }
     const downloadFile = async () => {

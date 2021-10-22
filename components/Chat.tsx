@@ -47,9 +47,9 @@ export default function Chat(): JSX.Element {
             setMessages(prevMessages => [...prevMessages, msg]);
         })
         setSocket(newSocket);
-        return () => {
-            newSocket.disconnect();
-        }
+        // return () => {
+        //     newSocket.disconnect();
+        // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

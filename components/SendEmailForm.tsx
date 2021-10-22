@@ -7,15 +7,16 @@ import AddFile from "./AddFile";
 import FilesToPreviewList from "./FilesToPreviewList";
 import LoadingSpinner from "./LoadingSpinner";
 import Select from 'react-select'
+import getSubjects from "../utils/getSubjects";
 
 export default function SendEmailForm(): JSX.Element {
-    const defaultSubject = 'math';
     const [title, setTitle] = useState('');
-    const [subject, setSubject] = useState(defaultSubject);
     const [files, setFiles] = useState<File[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const [subject, setSubject] = useState(null);
     const [isSending, setIsSending] = useState(false);
     const [sentSuccessFully, setIsSentSuccessFully] = useState(false);
+    const [options, setOptions] = useState([]);
     const { user: { username, school_class } } = useContext(UserContext);
     const customStyles = {
         option: (provided, state) => ({
@@ -25,13 +26,6 @@ export default function SendEmailForm(): JSX.Element {
             color: state.isSelected ? 'white' : '#4158D0',
         }),
     }
-    const options = [
-        { value: 'Math', label: 'Math' },
-        { value: 'Geography', label: 'Geography' },
-        { value: 'Physics', label: 'Physics' },
-        { value: 'PE', label: 'PE' },
-        { value: 'Computer Science', label: 'Computer Science' },
-    ]
     const removeFile = (index: number) => {
         setFiles(files.filter((_, fileIndex) => fileIndex !== index));
     }
@@ -85,12 +79,24 @@ export default function SendEmailForm(): JSX.Element {
         checkIsFilesNotTooBig();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [files])
+
+    useEffect(() => {
+        (async () => {
+            const data = await getSubjects(school_class);
+            const dataToOptions = data.map((item: string) => {
+                return {option: item, label: item}
+            })        
+            setOptions(dataToOptions);
+        })()
+    }, [])
+
     return (
         <div className="relative flex flex-col gap-5">
             <Select
-                placeholder='Pick class:'
+                placeholder='Pick subject:'
                 options={options}
                 styles={customStyles}
+                onChange={(item) => setSubject(item.option)}
             />
             <div className="w-full h-16 px-5 myShadow flex flex-col justify-center rounded">
                 {title && <p className="text-sm text-gray-400 z-10">Title</p>}

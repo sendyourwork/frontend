@@ -14,9 +14,9 @@ export default function NavbarMenu({ isLoggedIn }: { isLoggedIn: boolean }): JSX
             </div>
             <div className="flex ml-6 h-max">
                 {isLoggedIn ?
-                    <Link href="/drive">
+                    <Link href="/home">
                         <span className="py-2 px-3 border-2 border-main rounded text-main hover:text-white hover:bg-main font-medium cursor-pointer">
-                            Drive
+                            Home
                         </span>
                     </Link>
                     :

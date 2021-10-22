@@ -28,8 +28,6 @@ const Home: NextPage = () => {
       setSocketId(id);
     })
     socket.on('user', (data) => {
-      console.log(data);
-      
       localStorage.setItem('token', data.accessToken);
       setUser(data);
       setIsLoggedIn(true);

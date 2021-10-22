@@ -40,18 +40,19 @@ export default function Chat(): JSX.Element {
     useEffect(() => {
         const newSocket = io(BACKEND_URL, {
             extraHeaders: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
+                Authorization: "Bearer " + localStorage.getItem('token')
             }
         });
         newSocket.on('chat-msg-server',(msg: Message) => {
             setMessages(prevMessages => [...prevMessages, msg]);
         })
         setSocket(newSocket);
-        // return () => {
-        //     newSocket.disconnect();
-        // }
+        return () => {
+            newSocket.disconnect();
+        }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
 
     return (
         <>

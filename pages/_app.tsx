@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const auth = { isLoggedIn, setIsLoggedIn };
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -22,8 +23,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           setIsLoggedIn(true);
         }
       }
+      setIsLoading(false);
     })()
   }, [])
+
+  if(isLoading) return null
 
   return (
     <AuthContext.Provider value={auth}>

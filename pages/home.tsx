@@ -56,9 +56,11 @@ const Home: NextPage = () => {
                         <SendEmailForm />
                     </div>
                 </div>
-                <div className="flex flex-col xl:w-1/5 order-1 mb-5 xl:mb-0 xl:order-none gap-8 xl:min-h-full justify-between">
+                <div className="relative flex flex-col xl:w-1/5 order-1 mb-5 xl:mb-0 xl:order-none gap-8 xl:min-h-full justify-between">
                     <UserInfo name={username} />
-                    <Chat />
+                    <div className="fixed bottom-14 right-12 w-1/5">
+                        <Chat />
+                    </div>
                 </div>
             </div>
         </>

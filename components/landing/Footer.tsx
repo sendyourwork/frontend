@@ -1,13 +1,16 @@
+import { useMediaQuery } from "react-responsive"
+
 export default function Footer(): JSX.Element {
+    const isPhone = useMediaQuery({ query: '(max-width: 768px)' })
     return (
-        <footer className="w-100 h-20vh font-montserrat flex items-center">
+        <footer className="w-full h-20vh font-montserrat flex items-center">
             <div className="w-1/2 flex justify-center">
                 <div className="flex flex-col w-max md:w-1/3">
                     <span className="font-bold text-l md:text-xl">Work<span className="text-greenLight">with</span>us</span>
                     <span className="font-bold ml-6 mt-2 text-sm">If you&apos;re young web-dev who wanna join our team and built our app with us, mail us! </span>
                 </div>
             </div>
-            <div className="w-1/2 flex justify-center">
+            <div className="w-full md:w-1/2 flex justify-center">
                 <div className="flex flex-col w-max md:w-1/3">
                     <span className="font-bold text-l md:text-xl">Contact<span className="text-greenLight">Us</span></span>
                     <ul className="ml-6 mt-2 font-bold text-sm md:text-l">

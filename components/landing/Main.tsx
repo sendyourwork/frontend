@@ -25,12 +25,14 @@ export default function Main({ linkProps }: LinkButtonProps): JSX.Element {
                         <div className="mt-4">
                             {!isPhone ?
                                 <Link href={linkProps} passHref={true}>
-                                    <button className="bg-main text-white text-sm md:text-base rounded h-8 w-24 font-normal md:h-10 md:w-32">Get Started</button>
+                                    <button className="bg-main text-white hover:text-main hover:bg-white border-2 border-main transition duration-200 text-sm md:text-base rounded h-8 w-24 font-medium md:h-10 md:w-32">Get Started</button>
                                 </Link>
-                                :
-                                <button className="bg-main text-white text-sm rounded h-8 w-24 font-normal">
-                                    <a href="#downloadInfo">Get Started</a>
-                                </button>
+                                : <div className="mt-2">
+                                    <a href="#downloadInfo" className="w-10 h-52 bg-main p-2 rounded text-white font-medium">Get Started</a>
+                                    <Link href="/login">
+                                        <a className="text-l text-main font-medium ml-5">Log in</a>
+                                    </Link>
+                                </div>
                             }
 
                         </div>
@@ -38,8 +40,8 @@ export default function Main({ linkProps }: LinkButtonProps): JSX.Element {
                 </div>
             </Fade>
             <Fade right delay={700}>
-                <div className="flex items-center justify-end w-screen px-5 md:px-0 md:mr-10 h-5/6 md:w-1/2">
-                    <img src="/images/Group 146.png" className="myShadow" />
+                <div className="flex items-center justify-end w-screen px-5 mt-10 md:mt-0 md:px-0 md:mr-10 h-5/6 md:w-1/2">
+                    <img src="/images/image 1.png" className="myShadow" />
                 </div>
             </Fade>
         </main>

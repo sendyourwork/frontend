@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { checkIsFilesSizeNotTooBig } from '../helpers/checkIsFileSizeNotTooBig';
 import { File as FileI } from '../interfaces/file';
 import LoadingSpinner from "./LoadingSpinner";

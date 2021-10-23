@@ -19,7 +19,7 @@ const Page = () => {
     return (
         <>
             <Head>
-                <title>SendYourWork</title>
+                <title>Send Your Work</title>
             </Head>
             {loading ?
                 <LoadingScreen />

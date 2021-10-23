@@ -15,23 +15,30 @@ import { UserContext } from "./_app";
 
 const Home: NextPage = () => {
     const [searchValue, setSearchValue] = useState('');
-    const [files, setFiles] = useState<FileI[]>([]);
+    const [allFiles, setAllFiles] = useState<FileI[]>([]);
+    const [filteredFiles, setFilteredFiles] = useState([]);
+    const { user: { username } } = useContext(UserContext);
+    
     const addFile = (newFiles: FileI[]) => {
-        setFiles([...newFiles, ...files]);
+        setAllFiles([...newFiles, ...allFiles]);
     }
 
     const removeFile = (name: string) => {
-        setFiles(files.filter((item) => item.name !== name));
+        setAllFiles(allFiles.filter((item) => item.name !== name));
     }
-
-    const { user: { username } } = useContext(UserContext);
 
     useEffect(() => {
         (async() => {
             const data = await homeDriveGetFiles(username);
-            setFiles(data);
+            setAllFiles(data);
         })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    useEffect(() => {
+        setFilteredFiles(allFiles.filter((item) => item.name.match(searchValue)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchValue, allFiles])
     return (
         <>
             <Head>
@@ -51,14 +58,16 @@ const Home: NextPage = () => {
                         </div>
                         <AddFile add={addFile} fetchFunction={homeDriveUpload} />
                     </div>
-                    <FilesToDownloadList files={files} remove={removeFile} removeFetchFunction={homeDriveFileRemove} />
+                    <FilesToDownloadList files={filteredFiles} remove={removeFile} removeFetchFunction={(name) => homeDriveFileRemove(name, username)} />
                     <div className="w-full xl:w-5/12">
                         <SendEmailForm />
                     </div>
                 </div>
-                <div className="flex flex-col xl:w-1/5 order-1 mb-5 xl:mb-0 xl:order-none gap-8 xl:min-h-full justify-between">
+                <div className="relative flex flex-col xl:w-1/5 order-1 mb-5 xl:mb-0 xl:order-none gap-8 xl:min-h-full justify-between">
                     <UserInfo name={username} />
-                    <Chat />
+                    <div className="fixed bottom-14 right-12 w-1/5">
+                        <Chat />
+                    </div>
                 </div>
             </div>
         </>

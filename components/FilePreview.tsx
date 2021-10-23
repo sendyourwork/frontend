@@ -23,7 +23,7 @@ export default function FilePreview({file}: FilePreviewProps) {
     }
     const loadText = () => {
         const CHUNK_SIZE = 1024 * 10;
-        let shortFile;
+        let shortFile: Blob;
         if(file.size < offset + CHUNK_SIZE) {
             shortFile = file.slice(offset, file.size);
         }
@@ -52,6 +52,7 @@ export default function FilePreview({file}: FilePreviewProps) {
             setText('');
             setIsLoading(false);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isPreviewVisible])
     return (
         <>

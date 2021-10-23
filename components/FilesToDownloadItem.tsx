@@ -3,18 +3,19 @@ import formatFileSize from "../helpers/formatFileSize";
 import { File } from "../interfaces/file";
 import { UserContext } from "../pages/_app";
 import homeDriveFileDownload from "../utils/homeDriveFileDownload";
-import publicFileDownload from "../utils/publicFileDownload";
+import publicFileDownload from "../utils/classDriveFileDownload";
 import LoadingSpinner from "./LoadingSpinner";
 
 interface FilesToDownloadProps {
     file: File,
     checkIsUserAdmin: boolean,
+    subject: string,
     remove: (name: string) => void,
-    removeFetchFunction: (name: string, username: string) => Promise<any>,
+    removeFetchFunction: (name: string) => Promise<any>,
 }
 
-export default function FilesToDownloadItem({ file: { name, size }, checkIsUserAdmin, remove, removeFetchFunction = undefined }: FilesToDownloadProps): JSX.Element {
-    const { user: { role, username } } = useContext(UserContext);
+export default function FilesToDownloadItem({ file: { name, size }, checkIsUserAdmin, subject, remove, removeFetchFunction }: FilesToDownloadProps): JSX.Element {
+    const { user: { role, username, school_class } } = useContext(UserContext);
     const [isDeleting, setIsDeleting] = useState(false);
     const [error, setError] = useState(null);
     const formatedSize = formatFileSize(size);
@@ -22,7 +23,7 @@ export default function FilesToDownloadItem({ file: { name, size }, checkIsUserA
         setError(null);
         setIsDeleting(true);
         if (removeFetchFunction) {
-            const response = await removeFetchFunction(name, username);
+            const response = await removeFetchFunction(name);
             if (response === "OK") {
                 remove(name);
             }
@@ -37,7 +38,7 @@ export default function FilesToDownloadItem({ file: { name, size }, checkIsUserA
             await homeDriveFileDownload(name, username);
         }
         else {
-            await publicFileDownload(name);
+            await publicFileDownload(name, school_class, subject);
         }
     }
 

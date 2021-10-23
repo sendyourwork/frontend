@@ -36,7 +36,6 @@ const Page = () => {
                         <Navbar />
                         <Main linkProps="/" />
                         <MainInfoPhone />
-                        <Footer />
                     </>
             }
         </>

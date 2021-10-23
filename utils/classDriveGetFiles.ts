@@ -1,12 +1,10 @@
 import { BACKEND_URL } from "../config";
 
-export default function homeDriveUpload(files: FormData) {
-    return fetch(BACKEND_URL + "/userfiles", {
-        method:'POST',
+export default function classDriveGetFiles(school_class: string, subject: string) {
+    return fetch(`${BACKEND_URL}/files/${school_class}/${subject}`, {
         headers: {
             "Authorization": "Bearer " + localStorage.getItem('token')
-        },
-        body: files
+        }
     })
     .then(response => response.json())
 }

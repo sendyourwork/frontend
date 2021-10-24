@@ -58,7 +58,7 @@ export default function AddFile({ add, fetchFunction }: AddFileProps): JSX.Eleme
                 }
             }
             else {
-                setError("Your file weight more than 10 MB");
+                setError("Your file weight more than 20 MB");
             }
         }
     }
@@ -112,7 +112,7 @@ export default function AddFile({ add, fetchFunction }: AddFileProps): JSX.Eleme
             {error ?
                 <p className="text-red-500 text-sm">{error}</p>
                 :
-                <p className="text-gray-400 text-sm">PNG, jpg, gif files up to 10 MB in size are available for download</p>
+                <p className="text-gray-400 text-sm">PNG, jpg, gif files up to 20 MB in size are available for download</p>
             }
             {addFileViewVisible &&
                 <div className="absolute w-full h-full flex items-center justify-center top-0 left-0 bg-white border-2 border-black border-dashed rounded">

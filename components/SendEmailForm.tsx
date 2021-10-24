@@ -10,7 +10,7 @@ import Select from 'react-select'
 import getSubjects from "../utils/getSubjects";
 
 export default function SendEmailForm(): JSX.Element {
-    const maxMbSize = 70;
+    const maxMbSize = 50;
     const [title, setTitle] = useState('');
     const [files, setFiles] = useState<File[]>([]);
     const [error, setError] = useState<string | null>(null);

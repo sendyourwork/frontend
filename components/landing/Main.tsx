@@ -21,7 +21,7 @@ export default function Main({ linkProps }: LinkButtonProps): JSX.Element {
                 <div className="flex h-5/6 justify-center">
                     <div className="flex flex-col w-7/12 h-full justify-center mt-12 md:mt-0">
                         <span className="font-montserrat font-extrabold text-4xl md:text-6xl">Send your homework safe and simple</span>
-                        <span className="mt-4 text-m font-medium">We are help education in the world. We make world a better place.</span>
+                        <span className="mt-4 text-m font-medium">We are here in order to help education in the world. We make world a better place.</span>
                         <div className="mt-4">
                             {!isPhone ?
                                 <Link href={linkProps} passHref={true}>

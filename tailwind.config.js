@@ -40,8 +40,13 @@ module.exports = {
       },
       outline: {
         main: ['2px solid #4158D0']
+      },
+      fontSize: {
+        '10xl': '10rem',
+        '13xl': '13rem',
+        '15xl': '15rem',
       }
-    },
+    }
   },
   variants: {
     extend: {},

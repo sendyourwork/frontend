@@ -40,3 +40,9 @@ Użyj [npm](https://www.npmjs.com/) by zainstalować zależności backendu SendY
 ```bash
 npm install
 ```
+
+## ⚙️ Uruchamianie
+
+```bash
+npm run dev
+```

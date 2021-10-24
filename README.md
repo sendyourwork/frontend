@@ -9,6 +9,10 @@
 
 
 ---------------
+## ⚙️ Działanie aplikacji
+Wysyłanie plików z dysku za pomocą serwerowego maila na dane zespoły oraz przesyłanie plików z komutera na dysk. Wbudowany czat dla danych zespołów.
+Bezpieczne logowanie za bez potrzeby wpisywania e-maila i hasła nie narażając się na wykradnięcie przez szkodliwe oprogramowanie naszych danych. Logując się zeskanuj kod Qr przy pomocy autorskiej [apkikacji mobilnej](https://github.com/Elektron-team/mobile-app).
+
 ## 🖥️ Użyte technologie 
   - NextJs
   - Tailwind

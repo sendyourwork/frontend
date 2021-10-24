@@ -4,7 +4,7 @@
 
 # <p align="center">📱 SendYourWork aplikacja webowa (frontend)</p>
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-typescript.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
 
 
@@ -39,4 +39,10 @@ Użyj [npm](https://www.npmjs.com/) by zainstalować zależności backendu SendY
 
 ```bash
 npm install
+```
+
+## ⚙️ Uruchamianie
+
+```bash
+npm run dev
 ```

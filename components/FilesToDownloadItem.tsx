@@ -3,7 +3,7 @@ import formatFileSize from "../helpers/formatFileSize";
 import { File } from "../interfaces/file";
 import { UserContext } from "../pages/_app";
 import homeDriveFileDownload from "../utils/homeDriveFileDownload";
-import publicFileDownload from "../utils/classDriveFileDownload";
+import classDriveFileDownload from "../utils/classDriveFileDownload";
 import LoadingSpinner from "./LoadingSpinner";
 
 interface FilesToDownloadProps {
@@ -38,7 +38,7 @@ export default function FilesToDownloadItem({ file: { name, size }, checkIsUserA
             await homeDriveFileDownload(name, username);
         }
         else {
-            await publicFileDownload(name, school_class, subject);
+            await classDriveFileDownload(name, school_class, subject);
         }
     }
 

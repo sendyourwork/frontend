@@ -6,5 +6,13 @@ export default function classDriveGetFiles(school_class: string, subject: string
             "Authorization": "Bearer " + localStorage.getItem('token')
         }
     })
-    .then(response => response.json())
+    .then(async (response) => {
+        try {
+            const result = await response.json();
+            return result;
+        }
+        catch(err) {
+            return response;
+        }
+    })
 }

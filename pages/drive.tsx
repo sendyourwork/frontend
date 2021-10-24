@@ -50,7 +50,12 @@ const Drive: NextPage = () => {
         if(driveName) {
             (async () => {
                 const subjectFiles = await classDriveGetFiles(school_class, driveName);
-                setFiles(subjectFiles);
+                if(subjectFiles.length && subjectFiles.length > 0 && typeof subjectFiles !== "string") {
+                    setFiles(subjectFiles);
+                }
+                else {
+                    setFiles([]);
+                }
             })()
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -66,9 +71,9 @@ const Drive: NextPage = () => {
                 <div className="w-1/3 py-10">
                     <h1 className="my-5 text-4xl font-bold pb-3">Drives:<span className="text-main"></span></h1>
                     <Select
-                        defaultValue={options[0]}
                         options={options}
                         onChange={(e) => setDriveName(e.value)}
+                        placeholder={driveName}
                         styles={customStyles}
                     />
                 </div>

@@ -28,6 +28,9 @@ module.exports = {
         '20vh': '20vh',
         '85vh': '85vh'
       },
+      maxHeight: {
+        '3/4': '75vh'
+      },
       colors: {
         "main": "#4158D0",
         "highlight": "#2b2b2b",

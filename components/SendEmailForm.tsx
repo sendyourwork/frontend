@@ -22,8 +22,8 @@ export default function SendEmailForm(): JSX.Element {
         option: (provided, state) => ({
             ...provided,
             fontWeight: '600',
-            backgroundColor: state.isSelected ? '#5975ff' : 'white',
-            color: state.isSelected ? 'white' : '#4158D0',
+            backgroundColor: state.isSelected ? '#4158D0' : 'white',
+            color: state.isSelected ? 'white' : '#4158D0'
         }),
     }
     const removeFile = (index: number) => {
@@ -62,7 +62,13 @@ export default function SendEmailForm(): JSX.Element {
                     setIsSending(false);
                 }
                 else {
-                    setError(response);
+                    try {
+                        const error = JSON.parse(response);
+                        setError(error.errors[0].param + ": " + error.errors[0].msg);
+                    }
+                    catch(err) {
+                        setError("Unhandled error!");
+                    }
                     setIsSending(false);
                 }
             }
@@ -87,16 +93,18 @@ export default function SendEmailForm(): JSX.Element {
                 return {option: item, label: item}
             })        
             setOptions(dataToOptions);
+            setSubject(data[0]);
         })()
     }, [])
 
     return (
         <div className="relative flex flex-col gap-5">
             <Select
-                placeholder='Pick subject:'
                 options={options}
+                placeholder={subject}
                 styles={customStyles}
                 onChange={(item) => setSubject(item.option)}
+                className="z-20"
             />
             <div className="w-full h-16 px-5 myShadow flex flex-col justify-center rounded">
                 {title && <p className="text-sm text-gray-400 z-10">Title</p>}

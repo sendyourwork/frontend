@@ -16,7 +16,7 @@ export default function UserInfo({ name }: UserInfoProps): JSX.Element {
     }
     return (
         <div className="flex justify-between items-center gap-4">
-            <p className="text-blue-600">{name}</p>
+            <p className="text-blue-600 px-3">{name}</p>
             <div className="flex gap-4 items-center">
                 <Link href="/drive">
                     <img src="/images/drive.svg" className="w-8 cursor-pointer" />

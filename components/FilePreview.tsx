@@ -70,13 +70,13 @@ export default function FilePreview({file}: FilePreviewProps) {
         {isPreviewVisible && 
             <div className="fixed z-40 flex items-center justify-center w-screen h-screen left-0 top-0 bg-white md:p-16 bg-opacity-90 backdrop-brightness-75">
                 <button 
-                    className="bg-gray-400 text-3xl rounded-full w-10 h-10 absolute right-4 top-4 z-50"
+                    className="bg-blue-600 hover:bg-blue-700 flex justify-center items-center text-3xl rounded-full w-10 h-10 absolute right-7 top-7 z-50"
                     onClick={() => {
                         setIsPreviewVisible(false);
                         document.body.style.overflow = "auto";
                     }}
                 >
-                    <span>x</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#ffffff"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
                 </button>
                 {imgSrc ?
                     <img src={imgSrc} className="max-h-full max-w-full"/>

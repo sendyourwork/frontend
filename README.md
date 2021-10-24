@@ -9,6 +9,8 @@
 
 
 ---------------
+# Design: [Figma](https://www.figma.com/file/Tgjz32C22zXZysKOYnBcVb/SendYourWork?node-id=0%3A1)
+
 ## ⚙️ Działanie aplikacji
 Tworzenie konta i wysyłanie plików z dysku za pomocą serwerowego maila na dane zespoły oraz przesyłanie plików z komutera na własny dysk. Wbudowany czat dla danych zespołów.
 Bezpieczne logowanie za bez potrzeby wpisywania e-maila i hasła nie narażając się na wykradnięcie przez szkodliwe oprogramowanie naszych danych. Logując się zeskanuj kod Qr przy pomocy autorskiej [apkikacji mobilnej](https://github.com/Elektron-team/mobile-app).

@@ -36,9 +36,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" sizes="192x192" href="/images/logo.png" />
         <meta name="description" content="Send your work simply and safely." />
         <meta name='theme-color' content='#4158D0' />
-        <meta name="og:title" content="Send Your Work"/>
-        <meta name="og:description" content="Send your work simply and safely."/>
-        <meta name="og:image" content="/images/ogImage.png"/>
+        <meta property="og:title" content="Send Your Work"/>
+        <meta property="og:description" content="Send your work simply and safely."/>
+        <meta property="og:image" content="/images/ogImage.png"/>
       </Head>
       <AuthContext.Provider value={auth}>
         <UserContext.Provider value={{user, setUser}}>

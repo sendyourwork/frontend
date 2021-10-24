@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function NavbarMenu({ isLoggedIn }: { isLoggedIn: boolean }): JSX.Element {
     return (
-        <div className="hidden md:flex justify-center">
+        <div className="hidden md:flex justify-center items-center">
             <div className="flex h-max items-center text-gray-400 hover:text-gray-600 transition duration-500">
                 <span className="mx-3 cursor-pointer lg:mx-5">
                     <a href="#projectInfo">

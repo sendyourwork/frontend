@@ -9,7 +9,7 @@ interface LinkButtonProps {
 export default function Main({ linkProps }: LinkButtonProps): JSX.Element {
     const isPhone = useMediaQuery({ query: '(max-width: 768px)' })
     return (
-        <main className="flex h-85vh font-montserrat relative flex-col lg:flex-row items-center xl:items-start overflow-x-hidden">
+        <main className="flex h-85vh font-montserrat relative flex-col lg:flex-row items-center xl:items-start overflow-hidden">
             <Fade top delay={300}>
                 <img src="/images/Star 6.svg" className="left-4 transform hover:rotate-180 transition duration-500 hidden lg:block absolute" />
                 <img src="/images/Rectangle90.svg" className="top-3/4 left-1/4 transform transition duration-500 hidden lg:block absolute" />

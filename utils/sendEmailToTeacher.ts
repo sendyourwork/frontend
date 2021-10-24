@@ -5,11 +5,13 @@ interface SendEmailI {
     school_class: string,
     topic: string, 
     subject_name: string, 
-    filename: string,
-    filecontent: string | ArrayBuffer
+    data: {
+        filename: string,
+        content: string | ArrayBuffer
+    }[]
 }
 
-export default function sendEmailToTeacher({username, school_class, topic, subject_name, filename, filecontent}: SendEmailI) {
+export default function sendEmailToTeacher({username, school_class, topic, subject_name, data}: SendEmailI) {    
     return fetch(BACKEND_URL + "/sendMail", {
         method: "POST",
         headers: {
@@ -21,8 +23,7 @@ export default function sendEmailToTeacher({username, school_class, topic, subje
             school_class,
             topic,
             subject_name,
-            filename,
-            filecontent
+            data
         }),
     })
     .then(response => response.text())

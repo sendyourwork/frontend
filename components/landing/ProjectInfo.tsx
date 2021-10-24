@@ -25,7 +25,7 @@ export default function ProjectInfo(): JSX.Element {
                     <div className="relative w-1/3 myShadowActive h-92 rounded-2xl bg-white pt-8 pb-10">
                         <img src="/images/Q1.png" className="center z-0 pt-24" />
                         <div className="relative z-10">
-                            <h1 className="font-black text-3xl ml-10">2021</h1>
+                            <h1 className="font-black text-3xl ml-10">2022</h1>
                             <ul className="font-medium ml-0 xl:ml-12 mt-12">
                                 <li className="p-2 text-lg relative z-10">- Setting up legal entity</li>
                                 <li className="p-2 text-lg relative z-10">- Faster server</li>

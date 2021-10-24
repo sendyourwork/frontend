@@ -4,9 +4,10 @@ import { File as FileI } from '../interfaces/file';
 import LoadingSpinner from "./LoadingSpinner";
 type AddFileProps = {
     add: (newFiles: FileI[] | File[]) => void,
-    fetchFunction?: (files: FormData) => Promise<any>
+    fetchFunction?: (files: FormData) => Promise<any>,
+    customMaxSize?: number
 }
-export default function AddFile({ add, fetchFunction }: AddFileProps): JSX.Element {
+export default function AddFile({ add, fetchFunction, customMaxSize }: AddFileProps): JSX.Element {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [error, setError] = useState('');
     const [isUploading, setIsUploading] = useState(false);
@@ -26,7 +27,7 @@ export default function AddFile({ add, fetchFunction }: AddFileProps): JSX.Eleme
     }
     const checkAndSend = async (files: FileList | null) => {
         if (files && files.length) {
-            if (checkIsFilesSizeNotTooBig(files)) {
+            if (checkIsFilesSizeNotTooBig(files, customMaxSize)) {
                 setError("");
                 if (!checkIsFolder(files)) {
                     if (fetchFunction) {
@@ -58,7 +59,7 @@ export default function AddFile({ add, fetchFunction }: AddFileProps): JSX.Eleme
                 }
             }
             else {
-                setError("Your file weight more than 20 MB");
+                setError(`Your file weight more than ${customMaxSize || 20} MB`);
             }
         }
     }
@@ -112,7 +113,7 @@ export default function AddFile({ add, fetchFunction }: AddFileProps): JSX.Eleme
             {error ?
                 <p className="text-red-500 text-sm">{error}</p>
                 :
-                <p className="text-gray-400 text-sm">PNG, jpg, gif files up to 20 MB in size are available for download</p>
+                <p className="text-gray-400 text-sm">PNG, jpg, gif files up to {customMaxSize || 20} MB in size are available for download</p>
             }
             {addFileViewVisible &&
                 <div className="absolute w-full h-full flex items-center justify-center top-0 left-0 bg-white border-2 border-black border-dashed rounded">

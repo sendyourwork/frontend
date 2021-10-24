@@ -10,6 +10,7 @@ import Select from 'react-select'
 import getSubjects from "../utils/getSubjects";
 
 export default function SendEmailForm(): JSX.Element {
+    const maxMbSize = 70;
     const [title, setTitle] = useState('');
     const [files, setFiles] = useState<File[]>([]);
     const [error, setError] = useState<string | null>(null);
@@ -30,8 +31,8 @@ export default function SendEmailForm(): JSX.Element {
         setFiles(files.filter((_, fileIndex) => fileIndex !== index));
     }
     const checkIsFilesNotTooBig = () => {
-        if (!checkIsFilesSizeNotTooBig(files) && files.length > 0) {
-            setError("Your files weights more than 10 MB!");
+        if (!checkIsFilesSizeNotTooBig(files, maxMbSize) && files.length > 0) {
+            setError(`Your files weights more than ${maxMbSize} MB!`);
         }
         else {
             setError(null);
@@ -40,37 +41,49 @@ export default function SendEmailForm(): JSX.Element {
     const handleSubmit = async () => {
         if (title && subject && files.length > 0) {
             setIsSending(true);
-            const reader = new FileReader();
-            reader.readAsDataURL(files[0]);
-            reader.onload = async () => {
-                const response = await sendEmailToTeacher({
-                    username,
-                    school_class,
-                    topic: title,
-                    subject_name: subject,
-                    filename: files[0].name,
-                    filecontent: reader.result.toString().replace(/^data:(.*,)?/, '')
-                });
-                if (response === "OK") {
-                    setIsSentSuccessFully(true);
-                    setTimeout(() => {
-                        setIsSentSuccessFully(false);
-                    }, 5000);
-                    setFiles([]);
-                    setTitle('');
-                    setError(null);
-                    setIsSending(false);
-                }
-                else {
-                    try {
-                        const error = JSON.parse(response);
-                        setError(error.errors[0].param + ": " + error.errors[0].msg);
+            let data = [];
+            for(let i = 0; i < files.length; i++) {
+                await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(files[i]);
+                    reader.onload = async () => {
+                        data.push({
+                            filename: files[i].name,
+                            content: reader.result.toString().replace(/^data:(.*,)?/, '')
+                        })
+                        resolve("OK");
                     }
-                    catch(err) {
-                        setError("Unhandled error!");
+                    reader.onerror = (err) => {
+                        reject(err);
                     }
-                    setIsSending(false);
+                })
+            }
+            const response = await sendEmailToTeacher({
+                username,
+                school_class,
+                topic: title,
+                subject_name: subject,
+                data
+            });
+            if (response === "OK") {
+                setIsSentSuccessFully(true);
+                setTimeout(() => {
+                    setIsSentSuccessFully(false);
+                }, 5000);
+                setFiles([]);
+                setTitle('');
+                setError(null);
+                setIsSending(false);
+            }
+            else {
+                try {
+                    const error = JSON.parse(response);
+                    setError(error.errors[0].param + ": " + error.errors[0].msg);
                 }
+                catch(err) {
+                    setError(response);
+                }
+                setIsSending(false);
             }
         }
         else {
@@ -116,7 +129,7 @@ export default function SendEmailForm(): JSX.Element {
                     className="outline-none h-8 z-0"
                 />
             </div>
-            <AddFile add={addFiles} />
+            <AddFile add={addFiles} customMaxSize={maxMbSize}/>
             {files.length > 0 && <FilesToPreviewList remove={removeFile} files={files} />}
             {error && <p className="text-red-600 text-center">{error}</p>}
             <button onClick={handleSubmit} className="w-28 xl:ml-auto bg-blue-600 hover:bg-blue-700 text-white rounded-3xl flex px-5 py-3 gap-2">

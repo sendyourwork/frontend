@@ -70,7 +70,7 @@ export default function FilePreview({file}: FilePreviewProps) {
         {isPreviewVisible && 
             <div className="fixed z-40 flex items-center justify-center w-screen h-screen left-0 top-0 bg-white md:p-16 bg-opacity-90 backdrop-brightness-75">
                 <button 
-                    className="bg-blue-600 hover:bg-blue-700 flex justify-center items-center text-3xl rounded-full w-10 h-10 absolute right-7 top-7 z-50"
+                    className="bg-blue-600 hover:bg-blue-700 flex justify-center items-center text-3xl rounded-full w-10 h-10 absolute right-9 top-7 z-50"
                     onClick={() => {
                         setIsPreviewVisible(false);
                         document.body.style.overflow = "auto";

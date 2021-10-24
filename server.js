@@ -1,4 +1,5 @@
 const { createServer } = require("https");
+const http = require("http");
 const { parse } = require("url");
 const next = require("next");
 const fs = require("fs");
@@ -25,3 +26,8 @@ app.prepare().then(() => {
         console.log("Started server");
     });
 });
+
+http.createServer((req, res) => {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(80);

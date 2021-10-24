@@ -34,7 +34,7 @@ export default function LoginForm(): JSX.Element {
     return (
         <form className="relative flex flex-col w-96 rounded-xl myShadow z-10 bg-white" onSubmit={handleSubmit}>
             <h1 className="mx-5 mt-5 text-4xl font-bold pb-3">Profile</h1>
-            <h4 className="mx-5 w-12 text-center inline-block border-b-2 border-main pb-1">Sing in</h4>
+            <h4 className="mx-5 w-12 text-center inline-block border-b-2 border-main pb-1">Sign in</h4>
             <div className="flex flex-col py-5 items-center border-t border-gray-300">
                 <input
                     className="focus:outline-none focus:myShadowActive myShadow rounded w-10/12 h-12 my-2 py-2 pl-3.5" 

@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Link from "next/link";
 import Head from "next/head";
 import React, { useContext, useState, useEffect } from "react";
 import AddFile from "../components/AddFile";
@@ -18,7 +19,7 @@ const Home: NextPage = () => {
     const [allFiles, setAllFiles] = useState<FileI[]>([]);
     const [filteredFiles, setFilteredFiles] = useState([]);
     const { user: { username } } = useContext(UserContext);
-    
+
     const addFile = (newFiles: FileI[]) => {
         setAllFiles([...newFiles, ...allFiles]);
     }
@@ -28,16 +29,16 @@ const Home: NextPage = () => {
     }
 
     useEffect(() => {
-        (async() => {
+        (async () => {
             const data = await homeDriveGetFiles(username);
             setAllFiles(data);
         })()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         setFilteredFiles(allFiles.filter((item) => item.name.match(searchValue)));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchValue, allFiles])
     return (
         <>

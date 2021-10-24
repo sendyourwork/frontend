@@ -17,7 +17,7 @@ export default function Chat(): JSX.Element {
         event.preventDefault();
         if (inputValue) {
             socket.emit('chat-msg-client', {
-                msg:inputValue,
+                msg: inputValue,
                 username: user.username
             });
             setInputValue('');
@@ -49,14 +49,14 @@ export default function Chat(): JSX.Element {
             },
             forceNew: true
         });
-        newSocket.on('chat-msg-server',(msg: Message) => {
+        newSocket.on('chat-msg-server', (msg: Message) => {
             setMessages(prevMessages => [...prevMessages, msg]);
         })
         setSocket(newSocket);
         return () => {
             newSocket.disconnect();
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
@@ -81,13 +81,20 @@ export default function Chat(): JSX.Element {
                     })
                     }
                 </div>
-                <input
-                    type="text"
-                    placeholder="Type here..."
-                    className="w-full rounded outline-none myShadow py-4 px-2 mr-4 xl:mr-0 mt-8"
-                    value={inputValue}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => setInputValue(event.target.value)}
-                />
+                <div className="w-full myShadow py-4 px-2 mr-4 xl:mr-0 mt-8 flex justify-between gap-2">
+                    <input
+                        type="text"
+                        placeholder="Type here..."
+                        className="outline-none w-full"
+                        value={inputValue}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => setInputValue(event.target.value)}
+                    />
+                    <button type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#4158D0" ><path d="M0 0h24v24H0V0z" fill="none" /><path d="M4.01 6.03l7.51 3.22-7.52-1 .01-2.22m7.5 8.72L4 17.97v-2.22l7.51-1M2.01 3L2 10l15 2-15 2 .01 7L23 12 2.01 3z" /></svg>
+                    </button>
+
+                </div>
+
             </form>
             <button className="p-3 rounded-full bg-blue-600 fixed bottom-5 right-5 hover:cursor-pointer xl:hidden z-30" onClick={changeFormVisible}>
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M4 4h16v12H5.17L4 17.17V4m0-2c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H4zm2 10h8v2H6v-2zm0-3h12v2H6V9zm0-3h12v2H6V6z" /></svg>

@@ -42,7 +42,7 @@ export default function SendEmailForm(): JSX.Element {
         if (title && subject && files.length > 0) {
             setIsSending(true);
             let data = [];
-            for(let i = 0; i < files.length; i++) {
+            for (let i = 0; i < files.length; i++) {
                 await new Promise((resolve, reject) => {
                     const reader = new FileReader();
                     reader.readAsDataURL(files[i]);
@@ -80,7 +80,7 @@ export default function SendEmailForm(): JSX.Element {
                     const error = JSON.parse(response);
                     setError(error.errors[0].param + ": " + error.errors[0].msg);
                 }
-                catch(err) {
+                catch (err) {
                     setError(response);
                 }
                 setIsSending(false);
@@ -103,8 +103,8 @@ export default function SendEmailForm(): JSX.Element {
         (async () => {
             const data = await getSubjects(school_class);
             const dataToOptions = data.map((item: string) => {
-                return {option: item, label: item}
-            })        
+                return { option: item, label: item }
+            })
             setOptions(dataToOptions);
             setSubject(data[0]);
         })()
@@ -129,10 +129,10 @@ export default function SendEmailForm(): JSX.Element {
                     className="outline-none h-8 z-0"
                 />
             </div>
-            <AddFile add={addFiles} customMaxSize={maxMbSize}/>
+            <AddFile add={addFiles} customMaxSize={maxMbSize} />
             {files.length > 0 && <FilesToPreviewList remove={removeFile} files={files} />}
             {error && <p className="text-red-600 text-center">{error}</p>}
-            <button onClick={handleSubmit} className="w-28 xl:ml-auto bg-blue-600 hover:bg-blue-700 text-white rounded-3xl flex px-5 py-3 gap-2">
+            <button onClick={handleSubmit} className="w-28 xl:ml-auto bg-blue-600 hover:bg-blue-700 text-white rounded-3xl flex px-5 py-3 gap-2 mb-2">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M4.01 6.03l7.51 3.22-7.52-1 .01-2.22m7.5 8.72L4 17.97v-2.22l7.51-1M2.01 3L2 10l15 2-15 2 .01 7L23 12 2.01 3z" /></svg>
                 <span>Send</span>
             </button>

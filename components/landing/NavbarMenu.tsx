@@ -6,7 +6,7 @@ export default function NavbarMenu({ isLoggedIn }: { isLoggedIn: boolean }): JSX
             <div className="flex h-max items-center text-gray-400 hover:text-gray-600 transition duration-500">
                 <span className="mx-3 cursor-pointer lg:mx-5">
                     <a href="#projectInfo">
-                        About project
+                        Our roadmap
                     </a>
                 </span>
             </div>

@@ -11,12 +11,12 @@ const withAuth = Component => {
                 router.replace('/login');
             }
         })
-        if(isLoggedIn) return (
+        if (isLoggedIn) return (
             <Component {...props} />
         );
         return null;
     };
     return Auth;
-  };
-  
-  export default withAuth;
+};
+
+export default withAuth;

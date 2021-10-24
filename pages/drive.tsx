@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import AddFile from "../components/AddFile";
 import FilesToDownloadList from "../components/FilesToDownloadList";
@@ -62,7 +63,7 @@ const Drive: NextPage = () => {
     }, [driveName])
 
     return (
-        <>
+        <div className="flex">
             <Head>
                 <title>Public drive | Send Your Work</title>
             </Head>
@@ -84,7 +85,14 @@ const Drive: NextPage = () => {
                     <FilesToDownloadList files={files} remove={removeFile} removeFetchFunction={(name) => classDriveFileRemove(name, school_class, driveName)} subject={driveName} checkIsUserAdmin />
                 </div>
             </div>
-        </>
+            <div className="p-6 pr-8 ml-auto">
+                <div className="bg-blue-600 hover:bg-blue-700 p-2 rounded-full cursor-pointer">
+                    <Link href="/home">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 0 24 24" width="28px" fill="#ffffff"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 5.69l5 4.5V18h-2v-6H9v6H7v-7.81l5-4.5M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+                    </Link>
+                </div>
+            </div>
+        </div>
     )
 }
 export default withAuth(Drive);

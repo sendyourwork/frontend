@@ -66,9 +66,9 @@ const Drive: NextPage = () => {
             <Head>
                 <title>Public drive | Send Your Work</title>
             </Head>
-            <div className="py-14 px-12 w-full xl:w-3/4 ">
-                <h3 className="text-center xl:text-left text-5xl font-bold mb-8">Send<span className="text-main">Your</span>Work | {driveName}</h3>
-                <div className="w-1/3 py-10">
+            <div className="p-6 xl:py-14 xl:px-12 w-full xl:w-3/4 ">
+                <h3 className="text-center xl:text-left text-5xl font-bold">Send<span className="text-main">Your</span>Work | {driveName}</h3>
+                <div className="xl:w-1/3 py-4">
                     <h1 className="my-5 text-4xl font-bold pb-3">Drives:<span className="text-main"></span></h1>
                     <Select
                         options={options}
@@ -77,10 +77,12 @@ const Drive: NextPage = () => {
                         styles={customStyles}
                     />
                 </div>
-                <div className="xl:grid grid-cols-2 gap-9">
+                <div className="xl:grid grid-cols-2 gap-9 xl:pt-2 xl:pb-6">
                     <AddFile add={addFile} fetchFunction={(files: FormData) => publicFileUpload(files, school_class, driveName)} />
                 </div>
-                <FilesToDownloadList files={files} remove={removeFile} removeFetchFunction={(name) => classDriveFileRemove(name, school_class, driveName)} subject={driveName} checkIsUserAdmin />
+                <div>
+                    <FilesToDownloadList files={files} remove={removeFile} removeFetchFunction={(name) => classDriveFileRemove(name, school_class, driveName)} subject={driveName} checkIsUserAdmin />
+                </div>
             </div>
         </>
     )

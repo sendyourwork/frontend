@@ -113,7 +113,7 @@ export default function AddFile({ add, fetchFunction, customMaxSize }: AddFilePr
             {error ?
                 <p className="text-red-500 text-sm">{error}</p>
                 :
-                <p className="text-gray-400 text-sm">PNG, jpg, gif files up to {customMaxSize || 20} MB in size are available for download</p>
+                <p className="text-gray-400 text-sm">PNG, jpg, gif files up to {customMaxSize || 20} MB in size are available for upload</p>
             }
             {addFileViewVisible &&
                 <div className="absolute w-full h-full flex items-center justify-center top-0 left-0 bg-white border-2 border-black border-dashed rounded">

@@ -14,7 +14,7 @@ export default function Footer(): JSX.Element {
                 <div className="flex flex-col w-max md:w-1/3">
                     <span className="font-bold text-l md:text-xl">Contact<span className="text-greenLight">Us</span></span>
                     <ul className="ml-6 mt-2 font-bold text-sm md:text-l">
-                        <li className="">Mail<span className="text-greenLight">: </span>contact@sendyourwork.com</li>
+                        <li className="">Mail<span className="text-greenLight">: </span>contact@send-your.works</li>
                         <li className="">Facebook<span className="text-yellowLight">: </span><span className="italic">Soon!</span></li>
                         <li className="">Phone<span className="text-orangeLight">: </span><span className="italic">Soon!</span></li>
                         <li className="">Twitter<span className="text-main">: </span><span className="italic">Soon!</span></li>

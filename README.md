@@ -1,34 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <img alt="" height="200px" src="https://send-your.works:3000/ogImage.png"/>
+</p>
 
-## Getting Started
+# <p align="center">📱 SendYourWork aplikacja webowa (frontend)</p>
 
-First, run the development server:
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+
+
+---------------
+## ⚙️ Działanie aplikacji
+Wysyłanie plików z dysku za pomocą serwerowego maila na dane zespoły oraz przesyłanie plików z komutera na dysk. Wbudowany czat dla danych zespołów.
+Bezpieczne logowanie za bez potrzeby wpisywania e-maila i hasła nie narażając się na wykradnięcie przez szkodliwe oprogramowanie naszych danych. Logując się zeskanuj kod Qr przy pomocy autorskiej [apkikacji mobilnej](https://github.com/Elektron-team/mobile-app).
+
+## 🖥️ Użyte technologie 
+  - NextJs
+  - Tailwind
+  - TypeScript
+  - Zależności:
+      - [React Select](https://react-select.com/home)
+      - [React Syntax Highlighter](https://www.npmjs.com/package/react-syntax-highlighter)
+      - [React Reveal](https://www.react-reveal.com/)
+      - [React Responsive](https://www.npmjs.com/package/react-responsive)
+      - [Qr Code](https://www.npmjs.com/package/react-qr-code)
+      - [Formik](https://formik.org/)
+      - [Yup](https://www.npmjs.com/package/yup)
+      - [Socket.io Client](https://www.npmjs.com/package/socket.io-client)
+## 🚀 Plany na przyszłość:
+  - Nowa strona główna 
+  - Zmiana języka strony
+  - Panel zarządcy grupy
+  - Możliwość tworzenie grup innych niż klasy i korzystanie z aplikacji nie tylko w szkołach
+
+## ⚙️ Instalacja
+Użyj [npm](https://www.npmjs.com/) by zainstalować zależności backendu SendYourWork.
 
 ```bash
-npm run dev
-# or
-yarn dev
+npm install
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

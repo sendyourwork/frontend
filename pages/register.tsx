@@ -1,13 +1,13 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import { useRef } from 'react'
-import RegisterForm from '../components/RegisterForm'
-import { useMediaQuery } from 'react-responsive'
-import withoutAuth from '../components/withoutAuth'
+import Head from "next/head";
+import Link from "next/link";
+import { useRef } from "react";
+import RegisterForm from "../components/auth/RegisterForm";
+import { useMediaQuery } from "react-responsive";
+import withoutAuth from "../components/auth/withoutAuth";
 
 export default withoutAuth(function Register(): JSX.Element {
-    const photo = useRef<HTMLImageElement>(null)
-    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+    const photo = useRef<HTMLImageElement>(null);
+    const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
     return (
         <>
             <Head>
@@ -17,14 +17,25 @@ export default withoutAuth(function Register(): JSX.Element {
             <div className="flex h-screen items-center justify-around overflow-visible relative">
                 {!isMobile && <img src="/images/Star 6.svg" className="absolute left-24 top-12" />}
                 <img src="/images/Rectangle93.svg" className="absolute z-0 left-1/4 bottom-20" />
-                <img src="/images/Rectangle 103.svg" className="absolute z-0  left-1/5 w-2/5" ref={photo} />
+                <img
+                    src="/images/Rectangle 103.svg"
+                    className="absolute z-0  left-1/5 w-2/5"
+                    ref={photo}
+                />
                 <img src="/images/Rectangle94.svg" className="absolute z-0 right-52 w-20 top-14" />
-                <img src="/images/Half-circle.svg" alt="" className="absolute right-0 bottom-0 w-2/12" />
+                <img
+                    src="/images/Half-circle.svg"
+                    alt=""
+                    className="absolute right-0 bottom-0 w-2/12"
+                />
                 <RegisterForm />
                 <Link href="/">
-                    <img src="/images/close.svg" className="cursor-pointer absolute right-10 top-10" />
+                    <img
+                        src="/images/close.svg"
+                        className="cursor-pointer absolute right-10 top-10"
+                    />
                 </Link>
             </div>
         </>
-    )
-})
+    );
+});

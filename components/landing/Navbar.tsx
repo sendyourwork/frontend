@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
-import { Divide as Hamburger } from 'hamburger-react'
+import { Divide as Hamburger } from "hamburger-react";
 import NavbarMenu from "./NavbarMenu";
-import Fade from 'react-reveal/Fade'
-import { AuthContext } from "../../pages/_app";
+import Fade from "react-reveal/Fade";
 import { useState, useRef } from "react";
 import { useMediaQuery } from "react-responsive";
-import Link from 'next/link'
+import Link from "next/link";
+import { useUser } from "../../contexts/UserContext";
 
 export default function Navbar(): JSX.Element {
-    const { isLoggedIn } = useContext(AuthContext);
-    const textBox = useRef<HTMLDivElement>(null)
-    const isPhone = useMediaQuery({ query: '(max-width: 768px)' })
+    const { isLoggedIn } = useUser();
+    const textBox = useRef<HTMLDivElement>(null);
+    const isPhone = useMediaQuery({ query: "(max-width: 768px)" });
     // isPhone ? textBox.current?.classList.add('mx-auto') : textBox.current?.classList.remove('mx-auto');
     return (
         <Fade top delay={300}>
@@ -24,6 +24,6 @@ export default function Navbar(): JSX.Element {
                 </div>
                 <NavbarMenu isLoggedIn={isLoggedIn} />
             </nav>
-        </Fade >
-    )
+        </Fade>
+    );
 }

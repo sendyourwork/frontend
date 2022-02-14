@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import loginWithNameAndPassword from "../../utils/loginWithNameAndPassword";
+import loginWithNameAndPassword from "../../utils/auth/loginWithNameAndPassword";
 import Link from "next/link";
 import { useUser } from "../../contexts/UserContext";
 

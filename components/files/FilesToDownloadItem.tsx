@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import formatFileSize from "../../helpers/formatFileSize";
 import { File } from "../../interfaces/file";
-import homeDriveFileDownload from "../../utils/homeDriveFileDownload";
-import classDriveFileDownload from "../../utils/classDriveFileDownload";
+import homeDriveFileDownload from "../../utils/files/homeDriveFileDownload";
+import classDriveFileDownload from "../../utils/files/classDriveFileDownload";
 import LoadingSpinner from "../shared/LoadingSpinner";
-import classDriveFilePreview from "../../utils/classDriveFilePreview";
-import homeDriveFilePreview from "../../utils/homeDriveFilePreview";
+import classDriveFilePreview from "../../utils/files/classDriveFilePreview";
+import homeDriveFilePreview from "../../utils/files/homeDriveFilePreview";
 import { useUser } from "../../contexts/UserContext";
 
 interface FilesToDownloadProps {

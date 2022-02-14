@@ -1,14 +1,10 @@
-import React, { useContext } from "react";
-import { Divide as Hamburger } from "hamburger-react";
+import React from "react";
 import NavbarMenu from "./NavbarMenu";
 import Fade from "react-reveal/Fade";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
-import Link from "next/link";
-import { useUser } from "../../contexts/UserContext";
 
 export default function Navbar(): JSX.Element {
-    const { isLoggedIn } = useUser();
     const textBox = useRef<HTMLDivElement>(null);
     const isPhone = useMediaQuery({ query: "(max-width: 768px)" });
     // isPhone ? textBox.current?.classList.add('mx-auto') : textBox.current?.classList.remove('mx-auto');
@@ -22,7 +18,7 @@ export default function Navbar(): JSX.Element {
                         <span className="inline-block">Work</span>
                     </div>
                 </div>
-                <NavbarMenu isLoggedIn={isLoggedIn} />
+                <NavbarMenu />
             </nav>
         </Fade>
     );

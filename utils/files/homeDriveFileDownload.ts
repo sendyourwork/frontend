@@ -1,7 +1,7 @@
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from "../../config";
 
-export default function classDriveFileDownload(filename: string, school_class: string, subject: string) {
-    return fetch(`${BACKEND_URL}/files/${school_class}/${subject}/${filename}`, {
+export default function homeDriveFileDownload(filename: string, username: string) {
+    return fetch(BACKEND_URL + "/userfiles/" + username + "/" + filename, {
         headers: {
             "Authorization": "Bearer " + localStorage.getItem('token')
         }

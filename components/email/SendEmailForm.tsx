@@ -1,12 +1,12 @@
 import Fade from "react-reveal/Fade";
 import React, { useContext, useEffect, useState } from "react";
 import { checkIsFilesSizeNotTooBig } from "../../helpers/checkIsFileSizeNotTooBig";
-import sendEmailToTeacher from "../../utils/sendEmailToTeacher";
+import sendEmailToTeacher from "../../utils/email/sendEmailToTeacher";
 import AddFile from "../files/AddFile";
 import FilesToPreviewList from "../files/FilesToPreviewList";
 import LoadingSpinner from "../shared/LoadingSpinner";
 import Select from "react-select";
-import getSubjects from "../../utils/getSubjects";
+import getSubjects from "../../utils/subjects/getSubjects";
 import { useUser } from "../../contexts/UserContext";
 
 export default function SendEmailForm(): JSX.Element {

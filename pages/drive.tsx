@@ -5,12 +5,12 @@ import { useContext, useEffect, useState } from "react";
 import AddFile from "../components/files/AddFile";
 import FilesToDownloadList from "../components/files/FilesToDownloadList";
 import { File } from "../interfaces/file";
-import publicFileUpload from "../utils/classDriveFileUpload";
+import publicFileUpload from "../utils/files/classDriveFileUpload";
 import Select from "react-select";
-import getSubjects from "../utils/getSubjects";
-import classDriveGetFiles from "../utils/classDriveGetFiles";
+import getSubjects from "../utils/subjects/getSubjects";
+import classDriveGetFiles from "../utils/files/classDriveGetFiles";
 import withAuth from "../components/auth/withAuth";
-import classDriveFileRemove from "../utils/classDriveFileRemove";
+import classDriveFileRemove from "../utils/files/classDriveFileRemove";
 import { useMediaQuery } from "react-responsive";
 import { useUser } from "../contexts/UserContext";
 

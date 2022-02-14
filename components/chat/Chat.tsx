@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { Message } from "../../interfaces/message";
 import { BACKEND_URL } from "../../config";
-import getChatMessages from "../../utils/getChatMessages";
+import getChatMessages from "../../utils/chat/getChatMessages";
 import { useUser } from "../../contexts/UserContext";
 
 export default function Chat(): JSX.Element {

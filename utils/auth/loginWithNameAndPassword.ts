@@ -1,4 +1,4 @@
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from "../../config";
 
 export default function loginWithNameAndPassword(username: string, password: string) {
     return fetch(BACKEND_URL + "/login", {

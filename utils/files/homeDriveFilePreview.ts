@@ -1,4 +1,4 @@
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from "../../config";
 
 export default async function homeDriveFilePreview(filename: string, username: string) {
     fetch(BACKEND_URL + "/userfiles/" + username + "/" + filename, {

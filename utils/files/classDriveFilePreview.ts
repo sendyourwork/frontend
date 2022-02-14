@@ -1,4 +1,4 @@
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from "../../config";
 
 export default async function classDriveFilePreview(filename: string, school_class: string, subject: string) {
     fetch(`${BACKEND_URL}/files/${school_class}/${subject}/${filename}`, {

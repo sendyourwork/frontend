@@ -1,4 +1,4 @@
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from "../../config";
 
 export default function homeDriveUpload(files: FormData) {
     return fetch(BACKEND_URL + "/userfiles", {

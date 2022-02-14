@@ -8,9 +8,9 @@ import SendEmailForm from "../components/email/SendEmailForm";
 import UserInfo from "../components/user/UserInfo";
 import withAuth from "../components/auth/withAuth";
 import { File as FileI } from "../interfaces/file";
-import homeDriveFileRemove from "../utils/homeDriveFileRemove";
-import homeDriveUpload from "../utils/homeDriveFileUpload";
-import homeDriveGetFiles from "../utils/homeDriveGetFiles";
+import homeDriveFileRemove from "../utils/files/homeDriveFileRemove";
+import homeDriveUpload from "../utils/files/homeDriveFileUpload";
+import homeDriveGetFiles from "../utils/files/homeDriveGetFiles";
 import SearchInput from "../components/shared/SearchInput";
 import { useUser } from "../contexts/UserContext";
 

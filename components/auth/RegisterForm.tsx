@@ -3,7 +3,7 @@ import Link from "next/link";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import Fade from "react-reveal/Fade";
-import register from "../../utils/register";
+import register from "../../utils/auth/register";
 import { useUser } from "../../contexts/UserContext";
 
 const SignupSchema = Yup.object().shape({

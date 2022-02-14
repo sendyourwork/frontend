@@ -1,4 +1,4 @@
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from "../../config";
 
 export default function homeDriveGetFiles(username: string) {
     return fetch(BACKEND_URL + "/userfiles/" + username, {

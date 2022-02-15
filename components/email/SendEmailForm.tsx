@@ -1,5 +1,5 @@
 import Fade from "react-reveal/Fade";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { checkIsFilesSizeNotTooBig } from "../../helpers/checkIsFileSizeNotTooBig";
 import sendEmailToTeacher from "../../utils/email/sendEmailToTeacher";
 import AddFile from "../files/AddFile";

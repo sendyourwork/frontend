@@ -74,7 +74,7 @@ const Drive: NextPage = () => {
     return (
         <div className="flex">
             <Head>
-                <title>Public drive | Send Your Work</title>
+                <title>Class drive | Send Your Work</title>
             </Head>
             <div className="p-6 px-5 xl:py-14 xl:px-12 w-full xl:w-3/4 ">
                 {isMobile && (

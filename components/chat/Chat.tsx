@@ -32,9 +32,6 @@ export default function Chat(): JSX.Element {
     };
 
     useEffect(() => {
-        if (messages.length > 200) {
-            setMessages(messages.slice(1));
-        }
         chatRef.current?.scrollTo({ top: chatRef.current?.scrollHeight, behavior: "smooth" });
     }, [messages]);
 

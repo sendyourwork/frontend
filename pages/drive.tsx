@@ -107,6 +107,7 @@ const Drive: NextPage = () => {
                         onChange={(e) => setDriveName(e.value)}
                         styles={customStyles}
                         value={options.filter((option) => option.label === driveName)}
+                        isSearchable={false}
                     />
                 </div>
                 <div className="xl:grid grid-cols-2 gap-9 xl:pt-2 xl:pb-6">

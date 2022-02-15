@@ -105,8 +105,8 @@ const Drive: NextPage = () => {
                     <Select
                         options={options}
                         onChange={(e) => setDriveName(e.value)}
-                        placeholder={driveName}
                         styles={customStyles}
+                        value={options.filter((option) => option.label === driveName)}
                     />
                 </div>
                 <div className="xl:grid grid-cols-2 gap-9 xl:pt-2 xl:pb-6">

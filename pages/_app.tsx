@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <meta name="description" content="Send your work simply and safely." />
                 <meta name="theme-color" content="#4158D0" />
                 <meta property="og:title" content="Send Your Work" />
+                <meta property="og:type" content="website" />
                 <meta property="og:description" content="Send your work simply and safely." />
                 <meta property="og:image" content="/images/ogImage.png" />
             </Head>

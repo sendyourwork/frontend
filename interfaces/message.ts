@@ -1,4 +1,14 @@
 export interface Message {
-    username: string,
-    msg: string
+    type: "userMessage" | "systemMessage";
+    username?: string;
+    msg: string;
+}
+
+export interface UserMessage {
+    username: string;
+    msg: string;
+}
+
+export interface SystemMessage {
+    msg: string;
 }

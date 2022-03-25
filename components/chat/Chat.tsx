@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
-import { Message } from "../../interfaces/message";
+import { Message, SystemMessage, UserMessage } from "../../interfaces/message";
 import { BACKEND_URL } from "../../config";
 import getChatMessages from "../../utils/chat/getChatMessages";
 import { useUser } from "../../contexts/UserContext";
@@ -46,8 +46,11 @@ export default function Chat(): JSX.Element {
             },
             forceNew: true,
         });
-        newSocket.on("chat-msg-server", (msg: Message) => {
-            setMessages((prevMessages) => [...prevMessages, msg]);
+        newSocket.on("chat-msg-server", (msg: UserMessage) => {
+            setMessages((prevMessages) => [...prevMessages, { ...msg, type: "userMessage" }]);
+        });
+        newSocket.on("chat-msg-server-system", (msg: SystemMessage) => {
+            setMessages((prevMessages) => [...prevMessages, { ...msg, type: "systemMessage" }]);
         });
         setSocket(newSocket);
         return () => {
@@ -64,7 +67,17 @@ export default function Chat(): JSX.Element {
                 ref={formRef}
             >
                 <div className="flex flex-col py-2 gap-2 overflow-auto" ref={chatRef}>
-                    {messages.map(({ msg, username }: Message, index) => {
+                    {messages.map(({ type, msg, username }: Message, index) => {
+                        if (type === "systemMessage") {
+                            return (
+                                <p
+                                    className="py-2 px-4 text-sm rounded-3xl text-center text-gray-400 break-words"
+                                    key={index}
+                                >
+                                    {msg}
+                                </p>
+                            );
+                        }
                         if (user.username === username) {
                             return (
                                 <p

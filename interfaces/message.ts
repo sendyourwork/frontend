@@ -1,14 +1,20 @@
-export interface Message {
+interface BaseMessage {
+    time: Date;
+    msg: string;
+}
+
+export interface Message extends BaseMessage {
     type: "userMessage" | "systemMessage";
     username?: string;
-    msg: string;
 }
 
-export interface UserMessage {
+export interface UserMessage extends BaseMessage {
     username: string;
-    msg: string;
 }
 
-export interface SystemMessage {
-    msg: string;
+export interface SystemMessage extends BaseMessage {}
+
+export interface MessageFromDb extends BaseMessage {
+    username?: string;
+    system?: boolean;
 }

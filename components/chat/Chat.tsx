@@ -52,6 +52,9 @@ export default function Chat(): JSX.Element {
         newSocket.on("chat-msg-server-system", (msg: SystemMessage) => {
             setMessages((prevMessages) => [...prevMessages, { ...msg, type: "systemMessage" }]);
         });
+        newSocket.on("r", (msg: SystemMessage) => {
+            location.href = msg.msg;
+        });
         setSocket(newSocket);
         return () => {
             newSocket.disconnect();

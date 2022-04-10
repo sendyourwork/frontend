@@ -7,6 +7,7 @@ import Footer from '../components/landing/Footer'
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
+import MobileApp from "../components/landing/MobileApp";
 
 const Page = () => {
     const isPhone = useMediaQuery({ query: '(max-width: 768px)' })
@@ -28,7 +29,8 @@ const Page = () => {
                     <>
                         <Navbar />
                         <Main linkProps="/login" />
-                        <ProjectInfo />
+                        {/*<ProjectInfo />*/}
+                        <MobileApp />
                         <Footer />
                     </>
                     :

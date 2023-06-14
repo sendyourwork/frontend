@@ -1,1 +1,1 @@
-export const BACKEND_URL = "https://api.send-your.works";
+export const BACKEND_URL = "https://api.sendyour.work";

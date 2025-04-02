@@ -40,7 +40,7 @@ export default function Chat(): JSX.Element {
             const res = await getChatMessages(user.school_class);
             setMessages(res);
         })();
-        const newSocket = io(BACKEND_URL, {
+        const newSocket = io("/", {
             extraHeaders: {
                 Authorization: "Bearer " + localStorage.getItem("token"),
             },

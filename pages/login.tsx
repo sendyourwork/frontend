@@ -23,7 +23,7 @@ const Home: NextPage = () => {
     isRectangle ? photo.current?.classList.add("w-3/5") : photo.current?.classList.remove("w-3/5");
 
     useEffect(() => {
-        const socket = io(BACKEND_URL + "/qr");
+        const socket = io("/qr");
         socket.on("sID", ({ id }) => {
             setSocketId(id);
         });
